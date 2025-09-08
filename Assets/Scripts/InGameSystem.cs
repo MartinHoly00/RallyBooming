@@ -1,0 +1,86 @@
+using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class InGameSystem : MonoBehaviour
+{
+    public TextMeshProUGUI levelText;
+    public TextMeshProUGUI healthText;
+    public Slider healthBar;
+    public Slider xpBar;
+    public GameObject InGameUi;
+    private HealthSystem healthSystem;
+    private LevelSystem levelSystem;
+    public bool isPaused = false;
+    private GameManager gameManager;
+
+    private void Awake()
+    {
+        healthSystem = FindFirstObjectByType<HealthSystem>();
+        levelSystem = FindFirstObjectByType<LevelSystem>();
+    }
+
+    private void Start()
+    {
+        gameManager = FindFirstObjectByType<GameManager>();
+        if (healthSystem != null)
+        {
+            UpdateHealthUI(healthSystem.currentHealth, healthSystem.maxHealth);
+        }
+        if (levelSystem != null)
+        {
+            UpdateXPUI(levelSystem.currentXP, levelSystem.xpTrashold, levelSystem.currentLevel);
+        }
+        InGameUi.SetActive(true);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ToggleInGameUI(!InGameUi.activeInHierarchy);
+        }
+    }
+
+    public void UpdateHealthUI(float current, float max)
+    {
+
+        healthBar.maxValue = max;
+        healthBar.value = current;
+
+        healthText.text = $"Health: {current}";
+    }
+
+    public void UpdateXPUI(int current, int threshold, int level)
+    {
+        if (xpBar != null)
+        {
+            xpBar.maxValue = threshold;
+            xpBar.value = current;
+        }
+        if (levelText != null)
+        {
+            levelText.text = "Level: " + level;
+        }
+    }
+
+    public void ToggleInGameUI(bool isActive)
+    {
+        if (isActive)
+        {
+            InGameUi.SetActive(true);
+            gameManager.HideGameOverScreen();
+            gameManager.resumeButton.SetActive(false);
+            isPaused = false;
+        }
+        else
+        {
+            InGameUi.SetActive(false);
+            gameManager.ShowGameOverScreen();
+            gameManager.resumeButton.SetActive(true);
+            isPaused = true;
+        }
+    }
+
+}

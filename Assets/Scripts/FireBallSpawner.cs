@@ -14,6 +14,7 @@ public class FireBallSpawner : MonoBehaviour
     private Vector3 groundCenter;
     private float currentSpawnInterval;
     private float timer;
+    private InGameSystem inGameSystem;
 
 
     void Start()
@@ -21,15 +22,14 @@ public class FireBallSpawner : MonoBehaviour
         CalculateSpawnArea();
         currentSpawnInterval = initialSpawnInterval;
         timer = currentSpawnInterval;
+        inGameSystem = FindFirstObjectByType<InGameSystem>();
     }
 
     void Update()
     {
         HealthSystem hs = FindFirstObjectByType<HealthSystem>();
-        if (hs != null && hs.isDestroyed)
-        {
-            return;
-        }
+        if ((hs != null && hs.isDestroyed) || inGameSystem.isPaused) return;
+
         // Countdown timer
         timer -= Time.deltaTime;
 

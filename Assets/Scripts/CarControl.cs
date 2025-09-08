@@ -45,6 +45,8 @@ public class CarControl : MonoBehaviour
 
     public HealthSystem healthSystem;
 
+    private InGameSystem inGameSystem;
+
     void Start()
     {
         rb.mass = 1000f;
@@ -53,15 +55,17 @@ public class CarControl : MonoBehaviour
         rb.centerOfMass = new Vector3(0, -0.5f, 0);
 
         normalDrag = rb.linearDamping; // Save default drag
+
+        inGameSystem = FindFirstObjectByType<InGameSystem>();
     }
 
     void Update()
     {
-        if (!healthSystem.isDestroyed)
+        if (!healthSystem.isDestroyed && !inGameSystem.isPaused)
         {
             CameraFollow();
 
-            turnSpeed = 70f;
+            turnSpeed = currentSpeed > 10f ? 50f : 70f;
             bool isGrounded;
 
             if (transform.eulerAngles.z > 45 && transform.eulerAngles.z < 315 || transform.eulerAngles.x > 45 && transform.eulerAngles.x < 315)

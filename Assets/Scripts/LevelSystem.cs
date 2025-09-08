@@ -7,5 +7,6 @@ public class LevelSystem : MonoBehaviour
     public int xpTrashold = 5;
     public int currentXP = 0;
     public int xpPerOrb = 1;
+
 }
 

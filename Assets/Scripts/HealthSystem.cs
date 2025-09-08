@@ -9,17 +9,26 @@ public class HealthSystem : MonoBehaviour
     public GameObject[] carWheels;
     public bool isDestroyed = false;
     public GameManager gameManager;
+    private InGameSystem inGameSystem;
 
     private void Start()
     {
         currentHealth = maxHealth;
+        inGameSystem = FindFirstObjectByType<InGameSystem>();
     }
 
     public void TakeDamage(float amount)
     {
+        if (isDestroyed) return;
+
         currentHealth -= amount;
-        Debug.Log($"Health: {currentHealth}/{maxHealth}");
-        if (currentHealth <= 0)
+        currentHealth = Mathf.Max(currentHealth, 0);
+        Debug.Log("Current Health: " + currentHealth);
+
+        if (inGameSystem != null)
+            inGameSystem.UpdateHealthUI(currentHealth, maxHealth);
+
+        if (currentHealth <= 0 && !isDestroyed)
         {
             Die();
         }
@@ -42,6 +51,5 @@ public class HealthSystem : MonoBehaviour
         isDestroyed = true;
 
         gameManager.ShowGameOverScreen();
-        //open game over screen
     }
 }

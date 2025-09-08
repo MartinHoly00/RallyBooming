@@ -55,8 +55,21 @@ public class Meteorite : MonoBehaviour
 
     private void HandleGroundHit(Collision collision)
     {
-        SpawnExplosion();
-        Destroy(gameObject);
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            SpawnExplosion();
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Enviroment"))
+        {
+            //launch meteorite upwards and sideways
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), 1f, Random.Range(-1f, 1f)).normalized;
+                rb.linearVelocity = randomDirection * 20f;
+            }
+        }
     }
 
     private void SpawnExplosion()

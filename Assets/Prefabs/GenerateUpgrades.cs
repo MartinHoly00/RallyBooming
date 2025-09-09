@@ -9,7 +9,7 @@ public class GenerateUpgrades : MonoBehaviour
         new Upgrade("Speed Boost", null, "Increases your top speed by 10%.", UpgradeType.Speed),
         new Upgrade("Acceleration Boost", null, "Increases your acceleration by 15%.", UpgradeType.Acceleration),
         new Upgrade("Health Increase", null, "Increases your maximum health by 20 points.", UpgradeType.Health),
-        new Upgrade("Repair Kit", null, "Repairs 30 health points.", UpgradeType.Repair),
+        new Upgrade("Repair Kit", null, "Repairs 50 health points.", UpgradeType.Repair),
         new Upgrade("Steering Improvement", null, "Improves steering responsiveness by 10%.", UpgradeType.Steering),
         new Upgrade("Brake Enhancement", null, "Enhances braking power by 15%.", UpgradeType.Brake),
         new Upgrade("Nitro Boost", null, "Grants a temporary nitro boost for 5 seconds.", UpgradeType.Nitro),
@@ -21,11 +21,12 @@ public class GenerateUpgrades : MonoBehaviour
     public Button selectButton;
 
     private InGameSystem inGameSystem;
-
+    private PauseSystem pauseSystem;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         inGameSystem = FindFirstObjectByType<InGameSystem>();
+        pauseSystem = FindFirstObjectByType<PauseSystem>();
         selectedUpgrades = GetRandomUpgrades();
         upgradePanel.SetActive(false);
     }
@@ -116,6 +117,7 @@ public class GenerateUpgrades : MonoBehaviour
 
         upgradePanel.SetActive(false);
         inGameSystem.isPaused = false;
+        pauseSystem.ResumeGame();
     }
 
     private void ApplyUpgrade(UpgradeType type)
@@ -132,8 +134,24 @@ public class GenerateUpgrades : MonoBehaviour
                 Debug.Log("Acceleration Boost Applied!");
                 break;
             case UpgradeType.Health:
+                HealthSystem healthSystem = FindFirstObjectByType<HealthSystem>();
+                if (healthSystem != null)
+                {
+                    healthSystem.maxHealth += 20;
+                    healthSystem.Heal(20); // Optionally heal the player by the same amount
+                    inGameSystem.UpdateHealthUI(healthSystem.currentHealth, healthSystem.maxHealth);
+                }
                 // Apply health increase
                 Debug.Log("Health Increase Applied!");
+                break;
+            case UpgradeType.Repair:
+                HealthSystem hs = FindFirstObjectByType<HealthSystem>();
+                if (hs != null)
+                {
+                    hs.Heal(50); // Heal the player by 30 points
+                    inGameSystem.UpdateHealthUI(hs.currentHealth, hs.maxHealth);
+                }
+                Debug.Log("Repair Kit Applied!");
                 break;
             // Add other cases as needed
             default:

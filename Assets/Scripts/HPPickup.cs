@@ -4,7 +4,6 @@ public class HPPickup : MonoBehaviour
 {
     public GameObject pickupEffect;
     public float healthAmount = 20f;
-    private OrbSpawner orbSpawner;
     private HealthSystem healthSystem;
 
     private void Start()

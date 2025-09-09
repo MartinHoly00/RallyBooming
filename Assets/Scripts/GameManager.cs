@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
         if (inGameSystem != null)
         {
             inGameSystem.ToggleInGameUI(true);
+            pauseSystem.ResumeGame();
             if (resumeButton != null)
             {
                 resumeButton.SetActive(false);
@@ -49,16 +50,20 @@ public class GameManager : MonoBehaviour
         if (gameOverScreen != null)
         {
             gameOverScreen.SetActive(false);
+            inGameSystem.InGameUi.SetActive(true);
+            pauseSystem.ResumeGame();
         }
     }
 
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        pauseSystem.ResumeGame();
     }
 
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+        pauseSystem.ResumeGame();
     }
 }

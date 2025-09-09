@@ -42,6 +42,14 @@ public class InGameSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ToggleInGameUI(!InGameUi.activeInHierarchy);
+            if (InGameUi.activeInHierarchy)
+            {
+                gameManager.resumeButton.SetActive(false);
+            }
+            else
+            {
+                gameManager.resumeButton.SetActive(true);
+            }
         }
     }
 

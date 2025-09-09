@@ -7,12 +7,14 @@ public class OrbPickup : MonoBehaviour
     private InGameSystem inGameSystem;
     private OrbSpawner orbSpawner;
     private GenerateUpgrades generateUpgrades;
+    private PauseSystem pauseSystem;
 
     private void Start()
     {
         inGameSystem = FindFirstObjectByType<InGameSystem>();
         orbSpawner = FindFirstObjectByType<OrbSpawner>();
         generateUpgrades = FindFirstObjectByType<GenerateUpgrades>();
+        pauseSystem = FindFirstObjectByType<PauseSystem>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -33,6 +35,7 @@ public class OrbPickup : MonoBehaviour
                 levelSystem.xpPerOrb += 1;
                 inGameSystem.UpdateXPUI(levelSystem.currentXP, levelSystem.xpTrashold, levelSystem.currentLevel);
                 generateUpgrades.ShowUpgrades();
+                pauseSystem.PauseGame();
 
                 // Use Debug.Log instead of Console.WriteLine in Unity
                 Debug.Log(

@@ -34,6 +34,22 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
+    public void Heal(float amount)
+    {
+        if (isDestroyed) return;
+        if (currentHealth + amount > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        currentHealth += amount;
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
+        Debug.Log("Current Health: " + currentHealth);
+
+        if (inGameSystem != null)
+            inGameSystem.UpdateHealthUI(currentHealth, maxHealth);
+    }
+
     private void Die()
     {
         if (destructionEffect != null)

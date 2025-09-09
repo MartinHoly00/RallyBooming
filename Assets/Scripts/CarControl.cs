@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CarControl : MonoBehaviour
@@ -18,7 +19,6 @@ public class CarControl : MonoBehaviour
     public Transform frontRightWheelMesh;
     public Transform rearLeftWheelMesh;
     public Transform rearRightWheelMesh;
-    [SerializeField] public LayerMask groundLayer;
 
     public float currentSpeed = 0f;
     public bool isMovingForward = true;
@@ -47,6 +47,13 @@ public class CarControl : MonoBehaviour
 
     private InGameSystem inGameSystem;
 
+    private float deltaTime;
+
+    void Awake()
+    {
+        deltaTime = Time.fixedDeltaTime * 1000f;
+    }
+
     void Start()
     {
         rb.mass = 1000f;
@@ -61,6 +68,12 @@ public class CarControl : MonoBehaviour
 
     void Update()
     {
+    }
+
+    private void FixedUpdate()
+    {
+        deltaTime = Time.fixedDeltaTime * 60f; // Update deltaTime for FixedUpdate
+
         if (!healthSystem.isDestroyed && !inGameSystem.isPaused)
         {
             CameraFollow();
@@ -103,7 +116,7 @@ public class CarControl : MonoBehaviour
         float turn = Input.GetAxis("Horizontal");
 
         // Use AddForce instead of MovePosition for better collision handling
-        Vector3 forceDirection = carTransform.forward * move * acceleration;
+        Vector3 forceDirection = carTransform.forward * move * acceleration * deltaTime;
         rb.AddForce(forceDirection);
 
         // Limit max speed
@@ -123,14 +136,14 @@ public class CarControl : MonoBehaviour
         // Use AddTorque instead of MoveRotation for steering
         if (currentSpeed > 0.5f) // Only turn when moving
         {
-            float torqueAmount = turn * turnSpeed * currentSpeed;
-            rb.AddTorque(carTransform.up * torqueAmount);
+            float torqueAmount = turn * turnSpeed * currentSpeed * deltaTime;
+            rb.AddTorque(carTransform.up * torqueAmount * currentSpeed / 2f);
         }
 
         // Calculate target steering angle for visual wheels
         float maxSteerAngle = 30f;
         float targetSteerAngle = turn * maxSteerAngle;
-        currentSteerAngle = Mathf.Lerp(currentSteerAngle, targetSteerAngle, steeringSpeed * Time.deltaTime);
+        currentSteerAngle = Mathf.Lerp(currentSteerAngle, targetSteerAngle, steeringSpeed * deltaTime);
 
         UpdateWheelColliders(move);
     }
@@ -231,7 +244,10 @@ public class CarControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enviroment"))
         {
-            healthSystem.TakeDamage(10f);
+
+            float damage = Mathf.Round(currentSpeed);
+            if (damage < 5f) return;
+            healthSystem.TakeDamage(damage / 2);
         }
     }
 }

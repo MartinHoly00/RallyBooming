@@ -3129,7 +3129,7 @@ GameObject:
   - component: {fileID: 167698343}
   - component: {fileID: 167698342}
   m_Layer: 0
-  m_Name: OrbSpawner
+  m_Name: XPOrbSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7923,9 +7923,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2315844af49c8432cad35daff71cd9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 50
-  maxSpeed: 50
-  steeringSpeed: 20
+  acceleration: 250
+  maxSpeed: 40
+  steeringSpeed: 250
   rb: {fileID: 402286271}
   carTransform: {fileID: 402286266}
   carCamera: {fileID: 330585545}
@@ -7937,9 +7937,6 @@ MonoBehaviour:
   frontRightWheelMesh: {fileID: 402286281}
   rearLeftWheelMesh: {fileID: 402286278}
   rearRightWheelMesh: {fileID: 963264845}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
   currentSpeed: 0
   isMovingForward: 1
   cameraDistance: 10
@@ -11868,7 +11865,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ddce833fc91e84ba88424223c157fdf5, type: 2}
+  - {fileID: 2100000, guid: 594c9e2618b97d542bae8e47e544b7f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24141,6 +24138,54 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7761915777394392194, guid: 912f2a04d53dd844f845eb73d7ed2fa5, type: 3}
   m_PrefabInstance: {fileID: 996590943}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1364103030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1364103032}
+  - component: {fileID: 1364103031}
+  m_Layer: 0
+  m_Name: HealPowerUpSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1364103031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364103030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48369eb9c2ac4beea1f51ff0f22e9f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orbPrefab: {fileID: 4030120855793703060, guid: 7bd788278678746e4bc73da22b868257, type: 3}
+  maxOrbs: 2
+  spawnInterval: 5
+  ground: {fileID: 589432918}
+--- !u!4 &1364103032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364103030}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35.499325, y: 4.008901, z: -2.1608877}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1364332427 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3449991424911147866, guid: a68fd9ce7b1d50d4da362904b5e2bb61, type: 3}
@@ -36639,3 +36684,4 @@ SceneRoots:
   - {fileID: 167698343}
   - {fileID: 147480730}
   - {fileID: 1848702773}
+  - {fileID: 1364103032}

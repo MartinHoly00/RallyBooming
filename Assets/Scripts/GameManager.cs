@@ -6,9 +6,11 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverScreen;
     private InGameSystem inGameSystem;
     public GameObject resumeButton;
+    private PauseSystem pauseSystem;
 
     void Start()
     {
+        pauseSystem = FindFirstObjectByType<PauseSystem>();
         inGameSystem = FindFirstObjectByType<InGameSystem>();
         if (gameOverScreen != null)
         {
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
         {
             gameOverScreen.SetActive(true);
             inGameSystem.InGameUi.SetActive(false);
+            pauseSystem.PauseGame();
         }
     }
 

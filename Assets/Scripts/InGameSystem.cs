@@ -14,11 +14,13 @@ public class InGameSystem : MonoBehaviour
     private LevelSystem levelSystem;
     public bool isPaused = false;
     private GameManager gameManager;
+    private PauseSystem pauseSystem;
 
     private void Awake()
     {
         healthSystem = FindFirstObjectByType<HealthSystem>();
         levelSystem = FindFirstObjectByType<LevelSystem>();
+        pauseSystem = FindFirstObjectByType<PauseSystem>();
     }
 
     private void Start()
@@ -73,6 +75,7 @@ public class InGameSystem : MonoBehaviour
             gameManager.HideGameOverScreen();
             gameManager.resumeButton.SetActive(false);
             isPaused = false;
+            pauseSystem.ResumeGame();
         }
         else
         {
@@ -80,6 +83,7 @@ public class InGameSystem : MonoBehaviour
             gameManager.ShowGameOverScreen();
             gameManager.resumeButton.SetActive(true);
             isPaused = true;
+            pauseSystem.PauseGame();
         }
     }
 

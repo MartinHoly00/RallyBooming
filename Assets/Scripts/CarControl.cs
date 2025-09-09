@@ -74,7 +74,7 @@ public class CarControl : MonoBehaviour
     {
         deltaTime = Time.fixedDeltaTime * 60f; // Update deltaTime for FixedUpdate
 
-        if (!healthSystem.isDestroyed && !inGameSystem.isPaused)
+        if (!healthSystem.isDestroyed)
         {
             CameraFollow();
 

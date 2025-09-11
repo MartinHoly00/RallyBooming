@@ -3,8 +3,9 @@ using UnityEngine;
 public class Meteorite : MonoBehaviour
 {
     [Header("Meteorite Settings")]
-    public float damage = 100f;
+    public float damage = 100;
     public GameObject explosionEffect;
+    public SphereCollider sphereCollider;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -22,35 +23,21 @@ public class Meteorite : MonoBehaviour
     private void HandleCarHit(Collision collision, Transform playerTransform = null)
     {
         Rigidbody carRb = collision.rigidbody;
+        HealthSystem hs = collision.gameObject.GetComponent<HealthSystem>();
 
         if (carRb == null && playerTransform != null)
         {
             carRb = playerTransform.GetComponent<Rigidbody>();
         }
-
-        if (carRb != null)
-        {
-            Transform carTransform = playerTransform ?? collision.transform;
-            Vector3 impactForce = transform.position - carTransform.position;
-            impactForce.y = 0;
-
-            HealthSystem hs = collision.gameObject.GetComponent<HealthSystem>();
-
-            if (!hs)
-            {
-                hs = carTransform.GetComponentInChildren<HealthSystem>();
-            }
-
-            if (hs != null)
-            {
-                hs.TakeDamage(damage);
-            }
-
-            carRb.AddForce(-impactForce.normalized * 10000f, ForceMode.Impulse);
-        }
-
+        Destroy(sphereCollider);
         SpawnExplosion();
         Destroy(gameObject);
+
+        if (carRb != null && hs != null)
+        {
+
+            hs.TakeDamage(damage); //TODO - when hit, car explodes even if it has health left
+        }
     }
 
     private void HandleGroundHit(Collision collision)
@@ -60,15 +47,14 @@ public class Meteorite : MonoBehaviour
             SpawnExplosion();
             Destroy(gameObject);
         }
-        else if (collision.gameObject.CompareTag("Enviroment"))
+
+        if (collision.gameObject.CompareTag("Enviroment"))
         {
-            //launch meteorite upwards and sideways
-            Rigidbody rb = GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), 1f, Random.Range(-1f, 1f)).normalized;
-                rb.linearVelocity = randomDirection * 20f;
-            }
+            Debug.Log("Destroying Enviroment-tagged object!");
+            GameObject hitObject = collision.gameObject;
+            SpawnExplosion();
+            Destroy(hitObject);
+            Destroy(gameObject);
         }
     }
 

@@ -11,7 +11,9 @@ public enum UpgradeType
     Steering,
     Brake,
     Nitro,
-    XPBoost
+    MaxXPSpawn,
+    XPValue,
+    Shield
 }
 public class Upgrade
 {

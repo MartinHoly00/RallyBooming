@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
@@ -11,9 +12,12 @@ public class HealthSystem : MonoBehaviour
     public GameManager gameManager;
     private InGameSystem inGameSystem;
 
-    private void Start()
+    private void Awake()
     {
         currentHealth = maxHealth;
+    }
+    private void Start()
+    {
         inGameSystem = FindFirstObjectByType<InGameSystem>();
     }
 
@@ -28,7 +32,7 @@ public class HealthSystem : MonoBehaviour
         if (inGameSystem != null)
             inGameSystem.UpdateHealthUI(currentHealth, maxHealth);
 
-        if (currentHealth <= 0 && !isDestroyed)
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -65,6 +69,7 @@ public class HealthSystem : MonoBehaviour
             Destroy(carBody);
         }
         isDestroyed = true;
+        inGameSystem.isGameOver = true;
 
         gameManager.ShowGameOverScreen();
     }

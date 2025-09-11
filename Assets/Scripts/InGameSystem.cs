@@ -15,6 +15,7 @@ public class InGameSystem : MonoBehaviour
     public bool isPaused = false;
     private GameManager gameManager;
     private PauseSystem pauseSystem;
+    public bool isGameOver = false;
 
     private void Awake()
     {
@@ -28,7 +29,7 @@ public class InGameSystem : MonoBehaviour
         gameManager = FindFirstObjectByType<GameManager>();
         if (healthSystem != null)
         {
-            UpdateHealthUI(healthSystem.currentHealth, healthSystem.maxHealth);
+            UpdateHealthUI(healthSystem.maxHealth, healthSystem.maxHealth);
         }
         if (levelSystem != null)
         {
@@ -41,14 +42,17 @@ public class InGameSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (isGameOver) return;
             ToggleInGameUI(!InGameUi.activeInHierarchy);
             if (InGameUi.activeInHierarchy)
             {
                 gameManager.resumeButton.SetActive(false);
+                gameManager.SetHeaderText("Game Over");
             }
             else
             {
                 gameManager.resumeButton.SetActive(true);
+                gameManager.SetHeaderText("Paused");
             }
         }
     }
@@ -62,7 +66,7 @@ public class InGameSystem : MonoBehaviour
         healthText.text = $"Health: {current}";
     }
 
-    public void UpdateXPUI(int current, int threshold, int level)
+    public void UpdateXPUI(float current, float threshold, int level)
     {
         if (xpBar != null)
         {

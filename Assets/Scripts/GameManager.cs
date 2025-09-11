@@ -1,11 +1,13 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOverScreen;
-    private InGameSystem inGameSystem;
     public GameObject resumeButton;
+    public TextMeshProUGUI headText;
+    private InGameSystem inGameSystem;
     private PauseSystem pauseSystem;
 
     void Start()
@@ -65,5 +67,13 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
         pauseSystem.ResumeGame();
+    }
+
+    public void SetHeaderText(string text)
+    {
+        if (headText != null)
+        {
+            headText.text = text;
+        }
     }
 }

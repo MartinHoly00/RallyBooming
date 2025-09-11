@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,39 +7,52 @@ public class GenerateUpgrades : MonoBehaviour
 {
     //all upgrades
     public int numberOfUpgrades = 3;
-    public Upgrade[] allUpgrades = new Upgrade[]{
-        new Upgrade("Speed Boost", null, "Increases your top speed by 10%.", UpgradeType.Speed),
-        new Upgrade("Acceleration Boost", null, "Increases your acceleration by 15%.", UpgradeType.Acceleration),
-        new Upgrade("Health Increase", null, "Increases your maximum health by 20 points.", UpgradeType.Health),
-        new Upgrade("Repair Kit", null, "Repairs 50 health points.", UpgradeType.Repair),
-        new Upgrade("Steering Improvement", null, "Improves steering responsiveness by 10%.", UpgradeType.Steering),
-        new Upgrade("Brake Enhancement", null, "Enhances braking power by 15%.", UpgradeType.Brake),
-        new Upgrade("Nitro Boost", null, "Grants a temporary nitro boost for 5 seconds.", UpgradeType.Nitro),
-        new Upgrade("XP Boost", null, "Increases XP gained from orbs by 20% for the next level.", UpgradeType.XPBoost),
-    };
+
+    public List<Sprite> IconsForClient;
+    private Upgrade[] allUpgrades;
+
     public Upgrade[] selectedUpgrades;
     public GameObject upgradePanel;
     public GameObject upgradePrefab;
     public Button selectButton;
+    public GameObject xpSpawnerObject;
 
     private InGameSystem inGameSystem;
     private PauseSystem pauseSystem;
+    private CarControl carControl;
+    private LevelSystem levelSystem;
+    private OrbSpawner xpSpawner;
+    private HealthSystem healthSystem;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    void Awake()
+    {
+        // Initialize allUpgrades here using IconsForClient
+        allUpgrades = new Upgrade[]
+        {
+            new Upgrade("Speed Boost", IconsForClient.Count > 0 ? IconsForClient[0] : null, "Increases your top speed by 10%.", UpgradeType.Speed),
+            new Upgrade("Acceleration Boost", IconsForClient.Count > 1 ? IconsForClient[1] : null, "Increases your acceleration by 15%.", UpgradeType.Acceleration),
+            new Upgrade("Health Increase", IconsForClient.Count > 2 ? IconsForClient[2] : null, "Increases your maximum health by 20 points.", UpgradeType.Health),
+            new Upgrade("Repair Kit", IconsForClient.Count > 3 ? IconsForClient[3] : null, "Repairs 50 health points.", UpgradeType.Repair),
+            new Upgrade("Steering Improvement", IconsForClient.Count > 4 ? IconsForClient[4] : null, "Improves steering responsiveness by 10%.", UpgradeType.Steering),
+            new Upgrade("XP Value Boost", IconsForClient.Count > 5 ? IconsForClient[5] : null, "Increases XP gained from orbs by 50%.", UpgradeType.XPValue),
+            new Upgrade("XP Spawn Boost", IconsForClient.Count > 6 ? IconsForClient[6] : null, "Increases spawn of xp orbs by 20%.", UpgradeType.MaxXPSpawn),
+            //TODO - new Upgrade("Shield", IconsForClient.Count > 7 ? IconsForClient[7] : null, "Give you invincibility from meteorites for 15 seconds.", UpgradeType.Shield)
+        };
+    }
+
     void Start()
     {
         inGameSystem = FindFirstObjectByType<InGameSystem>();
         pauseSystem = FindFirstObjectByType<PauseSystem>();
+        carControl = FindAnyObjectByType<CarControl>();
+        levelSystem = FindFirstObjectByType<LevelSystem>();
+        xpSpawner = xpSpawnerObject.GetComponent<OrbSpawner>();
+        healthSystem = FindFirstObjectByType<HealthSystem>();
+
         selectedUpgrades = GetRandomUpgrades();
         upgradePanel.SetActive(false);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    //
 
     public Upgrade[] GetRandomUpgrades()
     {
@@ -45,16 +60,28 @@ public class GenerateUpgrades : MonoBehaviour
         System.Random rand = new System.Random();
         int upgradesLength = allUpgrades.Length;
 
+        // Create a list of available indices
+        List<int> availableIndices = new List<int>();
+        for (int i = 0; i < upgradesLength; i++)
+        {
+            availableIndices.Add(i);
+        }
+
         for (int i = 0; i < numberOfUpgrades; i++)
         {
-            int randomIndex = rand.Next(upgradesLength);
-            selectedUpgrades[i] = allUpgrades[randomIndex];
+            if (availableIndices.Count == 0) break; // Safety check
+
+            int randomListIndex = rand.Next(availableIndices.Count);
+            int upgradeIndex = availableIndices[randomListIndex];
+            selectedUpgrades[i] = allUpgrades[upgradeIndex];
             Debug.Log("Selected Upgrade: " + selectedUpgrades[i].header);
+
+            // Remove the used index so it can't be picked again
+            availableIndices.RemoveAt(randomListIndex);
         }
 
         return selectedUpgrades;
     }
-
     public void ShowUpgrades()
     {
         if (upgradePanel != null && upgradePrefab != null)
@@ -126,37 +153,58 @@ public class GenerateUpgrades : MonoBehaviour
         switch (type)
         {
             case UpgradeType.Speed:
-                // Apply speed boost
+                carControl.maxSpeed *= 1.1f;
                 Debug.Log("Speed Boost Applied!");
                 break;
+
             case UpgradeType.Acceleration:
-                // Apply acceleration boost
+                carControl.acceleration *= 1.15f;
                 Debug.Log("Acceleration Boost Applied!");
                 break;
+
+            case UpgradeType.Steering:
+                carControl.steeringSpeed = carControl.steeringSpeed * 1.1f;
+                break;
+
             case UpgradeType.Health:
-                HealthSystem healthSystem = FindFirstObjectByType<HealthSystem>();
                 if (healthSystem != null)
                 {
                     healthSystem.maxHealth += 20;
                     healthSystem.Heal(20); // Optionally heal the player by the same amount
                     inGameSystem.UpdateHealthUI(healthSystem.currentHealth, healthSystem.maxHealth);
                 }
-                // Apply health increase
-                Debug.Log("Health Increase Applied!");
                 break;
+
             case UpgradeType.Repair:
-                HealthSystem hs = FindFirstObjectByType<HealthSystem>();
-                if (hs != null)
+                if (healthSystem != null)
                 {
-                    hs.Heal(50); // Heal the player by 30 points
-                    inGameSystem.UpdateHealthUI(hs.currentHealth, hs.maxHealth);
+                    healthSystem.Heal(50);
+                    inGameSystem.UpdateHealthUI(healthSystem.currentHealth, healthSystem.maxHealth);
                 }
-                Debug.Log("Repair Kit Applied!");
                 break;
-            // Add other cases as needed
+
+            case UpgradeType.XPValue:
+                levelSystem.xpPerOrb *= 1.5f;
+                break;
+
+            case UpgradeType.MaxXPSpawn:
+                levelSystem.maxOrbs = Mathf.Round(levelSystem.maxOrbs * 1.2f);
+                xpSpawner.maxOrbs = levelSystem.maxOrbs;
+                break;
+
             default:
                 Debug.Log("Upgrade Applied: " + type.ToString());
                 break;
         }
+    }
+
+    List<int> GetIconsForClient()
+    {
+        List<int> icons = new List<int>();
+        foreach (Upgrade upgrade in selectedUpgrades)
+        {
+            icons.Add((int)upgrade.type);
+        }
+        return icons;
     }
 }

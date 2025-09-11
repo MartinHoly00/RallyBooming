@@ -4,7 +4,7 @@ public class OrbSpawner : MonoBehaviour
 {
     [Header("Orb Settings")]
     public GameObject orbPrefab;
-    public int maxOrbs = 10;
+    public float maxOrbs = 10;
     public float spawnInterval = 2f;
     [Header("References")]
     public GameObject ground;
@@ -21,6 +21,12 @@ public class OrbSpawner : MonoBehaviour
             {
                 groundBounds = groundRenderer.bounds;
             }
+        }
+
+        if (orbPrefab.GetComponent<OrbPickup>())
+        {
+            LevelSystem levelSystem = FindFirstObjectByType<LevelSystem>();
+            maxOrbs = levelSystem.maxOrbs;
         }
 
         InvokeRepeating(nameof(SpawnOrb), 1f, spawnInterval);

@@ -39,8 +39,8 @@ public class CarControl : MonoBehaviour
     private float currentCameraLag = 0f;
 
     [Header("Braking")]
-    public float brakeForce = 50f;   // Strength of braking
-    public float brakeDrag = 5f;     // Extra drag when braking
+    public float brakeForce = 1f;   // Strength of braking
+    public float brakeDrag = 100f;     // Extra drag when braking
     private float normalDrag;        // Default drag
 
     public HealthSystem healthSystem;
@@ -150,18 +150,16 @@ public class CarControl : MonoBehaviour
 
     void HandleBraking()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && rb.linearVelocity.magnitude > 0.1f)
         {
-            // Apply opposite force to slow down
             Vector3 brakeForceVector = -rb.linearVelocity.normalized * brakeForce;
-            rb.AddForce(brakeForceVector);
 
-            // Increase drag while braking
-            rb.linearDamping = brakeDrag;
+            rb.AddForce(brakeForceVector, ForceMode.Acceleration);
+
+            rb.linearDamping = Mathf.Lerp(rb.linearDamping, brakeDrag, Time.deltaTime * 2f);
         }
         else
         {
-            // Reset drag when not braking
             rb.linearDamping = normalDrag;
         }
     }
@@ -244,7 +242,6 @@ public class CarControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enviroment"))
         {
-
             float damage = Mathf.Round(currentSpeed);
             if (damage < 5f) return;
             healthSystem.TakeDamage(damage / 2);

@@ -2436,6 +2436,7 @@ MonoBehaviour:
   xpBar: {fileID: 610513554}
   InGameUi: {fileID: 1680939974}
   isPaused: 0
+  isGameOver: 0
 --- !u!4 &147480730
 Transform:
   m_ObjectHideFlags: 0
@@ -27360,6 +27361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 1775358765}
   resumeButton: {fileID: 858397835}
+  headText: {fileID: 1089791352}
 --- !u!4 &1658705947
 Transform:
   m_ObjectHideFlags: 0

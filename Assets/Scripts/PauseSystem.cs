@@ -14,12 +14,14 @@ public class PauseSystem : MonoBehaviour
     {
         Time.timeScale = 0f;
         isPaused = true;
+        ScoreSystem.Instance.PauseScore();
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1f;
         isPaused = false;
+        ScoreSystem.Instance.UnpauseScore();
     }
 
 }

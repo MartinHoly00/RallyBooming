@@ -24,6 +24,7 @@ public class OrbPickup : MonoBehaviour
 
             levelSystem.orbsCollected += 1;
             levelSystem.currentXP += levelSystem.xpPerOrb;
+            PlayerPrefs.SetInt("XPCollected", PlayerPrefs.GetInt("XPCollected", 0) + 1);
 
             inGameSystem.UpdateXPUI(levelSystem.currentXP, levelSystem.xpTrashold, levelSystem.currentLevel);
 

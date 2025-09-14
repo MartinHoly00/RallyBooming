@@ -13,7 +13,8 @@ public enum UpgradeType
     Nitro,
     MaxXPSpawn,
     XPValue,
-    Shield
+    Shield,
+    ScoreMultiplier
 }
 public class Upgrade
 {

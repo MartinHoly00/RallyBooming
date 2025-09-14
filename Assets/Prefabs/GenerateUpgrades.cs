@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class GenerateUpgrades : MonoBehaviour
@@ -23,6 +24,7 @@ public class GenerateUpgrades : MonoBehaviour
     private LevelSystem levelSystem;
     private OrbSpawner xpSpawner;
     private HealthSystem healthSystem;
+    private ScoreSystem scoreSystem;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Awake()
@@ -30,13 +32,14 @@ public class GenerateUpgrades : MonoBehaviour
         // Initialize allUpgrades here using IconsForClient
         allUpgrades = new Upgrade[]
         {
-            new Upgrade("Speed Boost", IconsForClient.Count > 0 ? IconsForClient[0] : null, "Increases your top speed by 10%.", UpgradeType.Speed),
-            new Upgrade("Acceleration Boost", IconsForClient.Count > 1 ? IconsForClient[1] : null, "Increases your acceleration by 15%.", UpgradeType.Acceleration),
-            new Upgrade("Health Increase", IconsForClient.Count > 2 ? IconsForClient[2] : null, "Increases your maximum health by 20 points.", UpgradeType.Health),
-            new Upgrade("Repair Kit", IconsForClient.Count > 3 ? IconsForClient[3] : null, "Repairs 50 health points.", UpgradeType.Repair),
-            new Upgrade("Steering Improvement", IconsForClient.Count > 4 ? IconsForClient[4] : null, "Improves steering responsiveness by 10%.", UpgradeType.Steering),
+            //new Upgrade("Speed Boost", IconsForClient.Count > 0 ? IconsForClient[0] : null, "Increases your top speed by 10%.", UpgradeType.Speed),
+            //new Upgrade("Acceleration Boost", IconsForClient.Count > 1 ? IconsForClient[1] : null, "Increases your acceleration by 15%.", UpgradeType.Acceleration),
+            //new Upgrade("Health Increase", IconsForClient.Count > 2 ? IconsForClient[2] : null, "Increases your maximum health by 20 points.", UpgradeType.Health),
+            //new Upgrade("Repair Kit", IconsForClient.Count > 3 ? IconsForClient[3] : null, "Repairs 50 health points.", UpgradeType.Repair),
+            //new Upgrade("Steering Improvement", IconsForClient.Count > 4 ? IconsForClient[4] : null, "Improves steering responsiveness by 10%.", UpgradeType.Steering),
             new Upgrade("XP Value Boost", IconsForClient.Count > 5 ? IconsForClient[5] : null, "Increases XP gained from orbs by 50%.", UpgradeType.XPValue),
             new Upgrade("XP Spawn Boost", IconsForClient.Count > 6 ? IconsForClient[6] : null, "Increases spawn of xp orbs by 20%.", UpgradeType.MaxXPSpawn),
+            new Upgrade("Score Increase", IconsForClient.Count > 7 ? IconsForClient[7] : null, "Score increases by +1 more.", UpgradeType.ScoreMultiplier)
             //TODO - new Upgrade("Shield", IconsForClient.Count > 7 ? IconsForClient[7] : null, "Give you invincibility from meteorites for 15 seconds.", UpgradeType.Shield)
         };
     }
@@ -49,6 +52,7 @@ public class GenerateUpgrades : MonoBehaviour
         levelSystem = FindFirstObjectByType<LevelSystem>();
         xpSpawner = xpSpawnerObject.GetComponent<OrbSpawner>();
         healthSystem = FindFirstObjectByType<HealthSystem>();
+        scoreSystem = FindFirstObjectByType<ScoreSystem>();
 
         selectedUpgrades = GetRandomUpgrades();
         upgradePanel.SetActive(false);
@@ -145,6 +149,7 @@ public class GenerateUpgrades : MonoBehaviour
         upgradePanel.SetActive(false);
         inGameSystem.isPaused = false;
         pauseSystem.ResumeGame();
+        PlayerPrefs.SetInt("UpgradesSelected", PlayerPrefs.GetInt("UpgradesSelected", 0) + 1);
     }
 
     private void ApplyUpgrade(UpgradeType type)
@@ -190,6 +195,10 @@ public class GenerateUpgrades : MonoBehaviour
             case UpgradeType.MaxXPSpawn:
                 levelSystem.maxOrbs = Mathf.Round(levelSystem.maxOrbs * 1.2f);
                 xpSpawner.maxOrbs = levelSystem.maxOrbs;
+                break;
+
+            case UpgradeType.ScoreMultiplier:
+                scoreSystem.scoreMultiplier += 1;
                 break;
 
             default:

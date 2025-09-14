@@ -44,7 +44,7 @@ public class InGameSystem : MonoBehaviour
         {
             if (isGameOver) return;
             ToggleInGameUI(!InGameUi.activeInHierarchy);
-            if (InGameUi.activeInHierarchy)
+            if (healthSystem.isDestroyed)
             {
                 gameManager.resumeButton.SetActive(false);
                 gameManager.SetHeaderText("Game Over");

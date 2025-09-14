@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI headText;
     private InGameSystem inGameSystem;
     private PauseSystem pauseSystem;
+    public TextMeshProUGUI scoreText;
 
     void Start()
     {
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
             gameOverScreen.SetActive(true);
             inGameSystem.InGameUi.SetActive(false);
             pauseSystem.PauseGame();
+            SetScoreText();
         }
     }
 
@@ -61,6 +63,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         pauseSystem.ResumeGame();
+        PlayerPrefs.SetInt("TotalGamesPlayed", PlayerPrefs.GetInt("TotalGamesPlayed", 0) + 1);
     }
 
     public void MainMenu()
@@ -74,6 +77,19 @@ public class GameManager : MonoBehaviour
         if (headText != null)
         {
             headText.text = text;
+        }
+    }
+
+    public void SetScoreText()
+    {
+        if (scoreText != null && ScoreSystem.Instance != null && inGameSystem.isGameOver)
+        {
+            scoreText.gameObject.SetActive(true);
+            scoreText.text = "Yor score: " + ScoreSystem.Instance.GetScore().ToString();
+        }
+        else
+        {
+            scoreText.gameObject.SetActive(false);
         }
     }
 }

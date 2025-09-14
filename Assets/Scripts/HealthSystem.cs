@@ -28,6 +28,7 @@ public class HealthSystem : MonoBehaviour
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0);
         Debug.Log("Current Health: " + currentHealth);
+        PlayerPrefs.SetInt("DamageTaken", PlayerPrefs.GetInt("DamageTaken", 0) + (int)amount);
 
         if (inGameSystem != null)
             inGameSystem.UpdateHealthUI(currentHealth, maxHealth);
@@ -72,5 +73,6 @@ public class HealthSystem : MonoBehaviour
         inGameSystem.isGameOver = true;
 
         gameManager.ShowGameOverScreen();
+        ScoreSystem.Instance.EndScore();
     }
 }

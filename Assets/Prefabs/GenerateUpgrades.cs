@@ -32,11 +32,11 @@ public class GenerateUpgrades : MonoBehaviour
         // Initialize allUpgrades here using IconsForClient
         allUpgrades = new Upgrade[]
         {
-            //new Upgrade("Speed Boost", IconsForClient.Count > 0 ? IconsForClient[0] : null, "Increases your top speed by 10%.", UpgradeType.Speed),
-            //new Upgrade("Acceleration Boost", IconsForClient.Count > 1 ? IconsForClient[1] : null, "Increases your acceleration by 15%.", UpgradeType.Acceleration),
-            //new Upgrade("Health Increase", IconsForClient.Count > 2 ? IconsForClient[2] : null, "Increases your maximum health by 20 points.", UpgradeType.Health),
-            //new Upgrade("Repair Kit", IconsForClient.Count > 3 ? IconsForClient[3] : null, "Repairs 50 health points.", UpgradeType.Repair),
-            //new Upgrade("Steering Improvement", IconsForClient.Count > 4 ? IconsForClient[4] : null, "Improves steering responsiveness by 10%.", UpgradeType.Steering),
+            new Upgrade("Speed Boost", IconsForClient.Count > 0 ? IconsForClient[0] : null, "Increases your top speed by 10%.", UpgradeType.Speed),
+            new Upgrade("Acceleration Boost", IconsForClient.Count > 1 ? IconsForClient[1] : null, "Increases your acceleration by 15%.", UpgradeType.Acceleration),
+            new Upgrade("Health Increase", IconsForClient.Count > 2 ? IconsForClient[2] : null, "Increases your maximum health by 20 points.", UpgradeType.Health),
+            new Upgrade("Repair Kit", IconsForClient.Count > 3 ? IconsForClient[3] : null, "Repairs 50 health points.", UpgradeType.Repair),
+            new Upgrade("Steering Improvement", IconsForClient.Count > 4 ? IconsForClient[4] : null, "Improves steering responsiveness by 10%.", UpgradeType.Steering),
             new Upgrade("XP Value Boost", IconsForClient.Count > 5 ? IconsForClient[5] : null, "Increases XP gained from orbs by 50%.", UpgradeType.XPValue),
             new Upgrade("XP Spawn Boost", IconsForClient.Count > 6 ? IconsForClient[6] : null, "Increases spawn of xp orbs by 20%.", UpgradeType.MaxXPSpawn),
             new Upgrade("Score Increase", IconsForClient.Count > 7 ? IconsForClient[7] : null, "Score increases by +1 more.", UpgradeType.ScoreMultiplier)

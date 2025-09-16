@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536cea8f506564b318b6d12211479978, type: 3}
+  m_Name: DefaultCar
+  m_EditorClassIdentifier: 
+  carId: 1
+  bodyPrefab: {fileID: 2383455756064238185, guid: 9e1da3c74b1294593870324981714dcf, type: 3}
+  frontLeftWheelPrefab: {fileID: 2206904812642992843, guid: ac14e15e12f8c44f581da3e92c7d2c5e, type: 3}
+  frontRightWheelPrefab: {fileID: 144498023141547579, guid: 1eb3939c9a516478e8b80f6ae1d35d58, type: 3}
+  rearLeftWheelPrefab: {fileID: 2213738898049111821, guid: 7f5a1cec324ed4f64bd298e06530a590, type: 3}
+  rearRightWheelPrefab: {fileID: 5147232420490088671, guid: 72941c93360774805a7d982506a2db0c, type: 3}
+  frontLeftWheelMesh: {fileID: 1290198100451714859, guid: 1eb3939c9a516478e8b80f6ae1d35d58, type: 3}
+  frontRightWheelMesh: {fileID: 1290198100451714859, guid: 1eb3939c9a516478e8b80f6ae1d35d58, type: 3}
+  rearLeftWheelMesh: {fileID: 8309235744061384058, guid: 7f5a1cec324ed4f64bd298e06530a590, type: 3}
+  rearRightWheelMesh: {fileID: 6470543022601950465, guid: 72941c93360774805a7d982506a2db0c, type: 3}
+  mass: 1000
+  acceleration: 250
+  maxSpeed: 30
+  steeringSpeed: 100
+  brakeForce: 1
+  brakeDrag: 100
+  health: 100

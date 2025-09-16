@@ -1,0 +1,348 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1076934695446168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4331350707277388}
+  m_Layer: 0
+  m_Name: golf-cart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4331350707277388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076934695446168}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4655220489433350}
+  - {fileID: 4912590457131962}
+  - {fileID: 4958400472602764}
+  - {fileID: 4248830519999770}
+  - {fileID: 4923994704860246}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &727758662723976425
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4331350707277388}
+    m_Modifications:
+    - target: {fileID: 723103704837941439, guid: 51fe131a95acd45daa10cb8f8f5a449d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 723103704837941439, guid: 51fe131a95acd45daa10cb8f8f5a449d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 723103704837941439, guid: 51fe131a95acd45daa10cb8f8f5a449d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0000076293945
+      objectReference: {fileID: 0}
+    - target: {fileID: 723103704837941439, guid: 51fe131a95acd45daa10cb8f8f5a449d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 723103704837941439, guid: 51fe131a95acd45daa10cb8f8f5a449d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 723103704837941439, guid: 51fe131a95acd45daa10cb8f8f5a449d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000007450581
+      objectReference: {fileID: 0}
+    - target: {fileID: 723103704837941439, guid: 51fe131a95acd45daa10cb8f8f5a449d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 723103704837941439, guid: 51fe131a95acd45daa10cb8f8f5a449d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 723103704837941439, guid: 51fe131a95acd45daa10cb8f8f5a449d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 723103704837941439, guid: 51fe131a95acd45daa10cb8f8f5a449d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 728985942181019425, guid: 51fe131a95acd45daa10cb8f8f5a449d, type: 3}
+      propertyPath: m_Name
+      value: golf-cart-wheel_FR
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 51fe131a95acd45daa10cb8f8f5a449d, type: 3}
+--- !u!4 &4923994704860246 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 723103704837941439, guid: 51fe131a95acd45daa10cb8f8f5a449d, type: 3}
+  m_PrefabInstance: {fileID: 727758662723976425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3638058035459747170
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4331350707277388}
+    m_Modifications:
+    - target: {fileID: 3635498689919684728, guid: ca70120d490b14c58a3e64ec2aaf27a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635498689919684728, guid: ca70120d490b14c58a3e64ec2aaf27a3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635498689919684728, guid: ca70120d490b14c58a3e64ec2aaf27a3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0000076293945
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635498689919684728, guid: ca70120d490b14c58a3e64ec2aaf27a3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635498689919684728, guid: ca70120d490b14c58a3e64ec2aaf27a3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635498689919684728, guid: ca70120d490b14c58a3e64ec2aaf27a3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000007450581
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635498689919684728, guid: ca70120d490b14c58a3e64ec2aaf27a3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635498689919684728, guid: ca70120d490b14c58a3e64ec2aaf27a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635498689919684728, guid: ca70120d490b14c58a3e64ec2aaf27a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635498689919684728, guid: ca70120d490b14c58a3e64ec2aaf27a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636970150565253480, guid: ca70120d490b14c58a3e64ec2aaf27a3, type: 3}
+      propertyPath: m_Name
+      value: golf-cart-wheel_FL
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca70120d490b14c58a3e64ec2aaf27a3, type: 3}
+--- !u!4 &4248830519999770 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3635498689919684728, guid: ca70120d490b14c58a3e64ec2aaf27a3, type: 3}
+  m_PrefabInstance: {fileID: 3638058035459747170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4902685514145406433
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4331350707277388}
+    m_Modifications:
+    - target: {fileID: 4904275638499791941, guid: a87779939706d481f88fa0ca6466d1e4, type: 3}
+      propertyPath: m_Name
+      value: golf-cart-wheel_BL
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906853791062085211, guid: a87779939706d481f88fa0ca6466d1e4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906853791062085211, guid: a87779939706d481f88fa0ca6466d1e4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906853791062085211, guid: a87779939706d481f88fa0ca6466d1e4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0000076293945
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906853791062085211, guid: a87779939706d481f88fa0ca6466d1e4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906853791062085211, guid: a87779939706d481f88fa0ca6466d1e4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906853791062085211, guid: a87779939706d481f88fa0ca6466d1e4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000007450581
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906853791062085211, guid: a87779939706d481f88fa0ca6466d1e4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906853791062085211, guid: a87779939706d481f88fa0ca6466d1e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906853791062085211, guid: a87779939706d481f88fa0ca6466d1e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906853791062085211, guid: a87779939706d481f88fa0ca6466d1e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a87779939706d481f88fa0ca6466d1e4, type: 3}
+--- !u!4 &4912590457131962 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4906853791062085211, guid: a87779939706d481f88fa0ca6466d1e4, type: 3}
+  m_PrefabInstance: {fileID: 4902685514145406433}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5561941215071737385
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4331350707277388}
+    m_Modifications:
+    - target: {fileID: 5560177905338796057, guid: fe2586c28ffcf47579339d35b0cd678f, type: 3}
+      propertyPath: m_Name
+      value: golf-cart-wheel_BR
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565993608808910501, guid: fe2586c28ffcf47579339d35b0cd678f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565993608808910501, guid: fe2586c28ffcf47579339d35b0cd678f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565993608808910501, guid: fe2586c28ffcf47579339d35b0cd678f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0000076293945
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565993608808910501, guid: fe2586c28ffcf47579339d35b0cd678f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565993608808910501, guid: fe2586c28ffcf47579339d35b0cd678f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565993608808910501, guid: fe2586c28ffcf47579339d35b0cd678f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000007450581
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565993608808910501, guid: fe2586c28ffcf47579339d35b0cd678f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565993608808910501, guid: fe2586c28ffcf47579339d35b0cd678f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565993608808910501, guid: fe2586c28ffcf47579339d35b0cd678f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565993608808910501, guid: fe2586c28ffcf47579339d35b0cd678f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fe2586c28ffcf47579339d35b0cd678f, type: 3}
+--- !u!4 &4958400472602764 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5565993608808910501, guid: fe2586c28ffcf47579339d35b0cd678f, type: 3}
+  m_PrefabInstance: {fileID: 5561941215071737385}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6226993973544233788
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4331350707277388}
+    m_Modifications:
+    - target: {fileID: 6228174582496077844, guid: 37a6f56836aae428794d378425855d53, type: 3}
+      propertyPath: m_Name
+      value: golf-cart-base
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231350084874115642, guid: 37a6f56836aae428794d378425855d53, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231350084874115642, guid: 37a6f56836aae428794d378425855d53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231350084874115642, guid: 37a6f56836aae428794d378425855d53, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0000076293945
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231350084874115642, guid: 37a6f56836aae428794d378425855d53, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231350084874115642, guid: 37a6f56836aae428794d378425855d53, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231350084874115642, guid: 37a6f56836aae428794d378425855d53, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000007450581
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231350084874115642, guid: 37a6f56836aae428794d378425855d53, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231350084874115642, guid: 37a6f56836aae428794d378425855d53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231350084874115642, guid: 37a6f56836aae428794d378425855d53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231350084874115642, guid: 37a6f56836aae428794d378425855d53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 37a6f56836aae428794d378425855d53, type: 3}
+--- !u!4 &4655220489433350 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6231350084874115642, guid: 37a6f56836aae428794d378425855d53, type: 3}
+  m_PrefabInstance: {fileID: 6226993973544233788}
+  m_PrefabAsset: {fileID: 0}

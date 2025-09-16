@@ -23,6 +23,11 @@ public class GameManager : MonoBehaviour
         {
             resumeButton.SetActive(false);
         }
+        if (scoreText != null)
+        {
+            scoreText.gameObject.SetActive(false);
+            scoreText.text = "";
+        }
     }
 
     public void ReturnToGame()
@@ -64,6 +69,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         pauseSystem.ResumeGame();
         PlayerPrefs.SetInt("TotalGamesPlayed", PlayerPrefs.GetInt("TotalGamesPlayed", 0) + 1);
+        ScoreSystem.Instance.StartScore();
     }
 
     public void MainMenu()

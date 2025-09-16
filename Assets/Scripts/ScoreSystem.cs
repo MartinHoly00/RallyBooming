@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 
 public class ScoreSystem : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class ScoreSystem : MonoBehaviour
     private int currentScore;
     private bool isScoring;
     private Coroutine scoreRoutine;
+    private CarControl carControl;
+    private int speedMultiplaier = 1;
+    public TextMeshProUGUI speedMultiText;
 
     void Awake()
     {
@@ -19,15 +23,18 @@ public class ScoreSystem : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 
     void Start()
     {
+        carControl = FindFirstObjectByType<CarControl>();
         StartScore();
+        speedMultiText.gameObject.SetActive(true);
+    }
+
+    void Update()
+    {
+        CalculateSpeedMiltiplaier();
     }
 
     public void StartScore()
@@ -64,7 +71,7 @@ public class ScoreSystem : MonoBehaviour
     {
         while (isScoring)
         {
-            currentScore += 1 * scoreMultiplier;
+            currentScore += 1 * scoreMultiplier * speedMultiplaier;
             scoreText.text = "Score: " + currentScore.ToString();
             yield return new WaitForSeconds(1f);
         }
@@ -90,5 +97,36 @@ public class ScoreSystem : MonoBehaviour
     public int GetScore()
     {
         return currentScore;
+    }
+
+    private void CalculateSpeedMiltiplaier()
+    {
+        float speed = carControl.currentSpeed;
+        if (speed > 20 && speed < 30)
+        {
+            speedMultiplaier = 2;
+            speedMultiText.gameObject.SetActive(true);
+            speedMultiText.color = Color.yellow;
+            speedMultiText.text = speedMultiplaier.ToString() + "x";
+        }
+        else if (speed > 30 && speed < 50)
+        {
+            speedMultiplaier = 3;
+            speedMultiText.gameObject.SetActive(true);
+            speedMultiText.color = new Color(1f, 0.5f, 0f);
+            speedMultiText.text = speedMultiplaier.ToString() + "x";
+        }
+        else if (speed > 50)
+        {
+            speedMultiplaier = 4;
+            speedMultiText.gameObject.SetActive(true);
+            speedMultiText.color = Color.red;
+            speedMultiText.text = speedMultiplaier.ToString() + "x";
+        }
+        else
+        {
+            speedMultiplaier = 1;
+            speedMultiText.gameObject.SetActive(false);
+        }
     }
 }

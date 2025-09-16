@@ -5,11 +5,13 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject mainMenuUI;
     public GameObject statisticsUI;
+    public GameObject shopUI;
 
     void Start()
     {
         mainMenuUI.SetActive(true);
         statisticsUI.SetActive(false);
+        shopUI.SetActive(false);
     }
 
     public void StartGame()
@@ -24,10 +26,22 @@ public class MainMenu : MonoBehaviour
         statisticsUI.SetActive(true);
     }
 
+    public void OpenShop()
+    {
+        mainMenuUI.SetActive(false);
+        shopUI.SetActive(true);
+    }
+
 
     public void CloseStatistics()
     {
         statisticsUI.SetActive(false);
+        mainMenuUI.SetActive(true);
+    }
+
+    public void CloseShop()
+    {
+        shopUI.SetActive(false);
         mainMenuUI.SetActive(true);
     }
 

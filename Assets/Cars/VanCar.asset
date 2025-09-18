@@ -13,19 +13,11 @@ MonoBehaviour:
   m_Name: VanCar
   m_EditorClassIdentifier: 
   carId: 3
-  bodyPrefab: {fileID: 4450619487380409747, guid: 36a11c25be96d40a8be5939093405d86, type: 3}
-  frontLeftWheelPrefab: {fileID: 3905292647692387673, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
-  frontRightWheelPrefab: {fileID: 7577657082729770137, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
-  rearLeftWheelPrefab: {fileID: 8218606224220943952, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
-  rearRightWheelPrefab: {fileID: 4057402951561709025, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
-  frontLeftWheelMesh: {fileID: 3902199380095454321, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
-  frontRightWheelMesh: {fileID: 7576688551239429909, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
-  rearLeftWheelMesh: {fileID: 8215963271965730746, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
-  rearRightWheelMesh: {fileID: 4055154785921287881, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
-  mass: 1200
+  carPrefab: {fileID: 1000014082902004, guid: 3ccacde2242aa934f800f035549fe0c8, type: 3}
+  mass: 1000
   acceleration: 200
   maxSpeed: 25
   steeringSpeed: 100
   brakeForce: 1
   brakeDrag: 100
-  health: 100
+  health: 150

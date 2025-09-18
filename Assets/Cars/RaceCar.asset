@@ -13,15 +13,7 @@ MonoBehaviour:
   m_Name: RaceCar
   m_EditorClassIdentifier: 
   carId: 2
-  bodyPrefab: {fileID: 5722110932119363364, guid: 1de35fa5bd1b4417b8b7977765fda674, type: 3}
-  frontLeftWheelPrefab: {fileID: 3151369390116276497, guid: 5edecac242f964380ae1f20e09cb8dcd, type: 3}
-  frontRightWheelPrefab: {fileID: 2358410640594942256, guid: e4e13f2354473439f967f8b7fd53c390, type: 3}
-  rearLeftWheelPrefab: {fileID: 2052646622792600206, guid: 3e4fe921888fa499ab387e3f067718fa, type: 3}
-  rearRightWheelPrefab: {fileID: 2135974754823292734, guid: 2c0b1eac1714146d48c793992bc5d5f0, type: 3}
-  frontLeftWheelMesh: {fileID: 3151369390116312369, guid: 5edecac242f964380ae1f20e09cb8dcd, type: 3}
-  frontRightWheelMesh: {fileID: 2358410640595232016, guid: e4e13f2354473439f967f8b7fd53c390, type: 3}
-  rearLeftWheelMesh: {fileID: 2052646622792439470, guid: 3e4fe921888fa499ab387e3f067718fa, type: 3}
-  rearRightWheelMesh: {fileID: 2135974754823592734, guid: 2c0b1eac1714146d48c793992bc5d5f0, type: 3}
+  carPrefab: {fileID: 8171010326917101582, guid: 768c5221fa8c6b2499a21135fc961a15, type: 3}
   mass: 1000
   acceleration: 250
   maxSpeed: 35

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536cea8f506564b318b6d12211479978, type: 3}
+  m_Name: PoliceCar
+  m_EditorClassIdentifier: 
+  carId: 4
+  carPrefab: {fileID: 1092903705789857238, guid: a1c54521c48f91447a69e41292f7727c, type: 3}
+  mass: 1000
+  acceleration: 250
+  maxSpeed: 30
+  steeringSpeed: 100
+  brakeForce: 1
+  brakeDrag: 100
+  health: 100

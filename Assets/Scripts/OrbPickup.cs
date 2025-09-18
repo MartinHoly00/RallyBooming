@@ -20,7 +20,7 @@ public class OrbPickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player"))
+        if (!other.CompareTag("CarBody"))
             return;
 
         // try multiple ways to get LevelSystem from the player collider
@@ -33,7 +33,7 @@ public class OrbPickup : MonoBehaviour
         {
             Debug.LogError($"OrbPickup: No LevelSystem found on player object '{other.gameObject.name}'. " +
                            "Attach LevelSystem to the Player or its parents/children, or adjust retrieval logic.");
-            return; // safety: stop processing if we don't have level data
+            return;
         }
 
         // update XP / counters

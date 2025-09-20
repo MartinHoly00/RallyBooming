@@ -21,3 +21,9 @@ MonoBehaviour:
   brakeForce: 1
   brakeDrag: 100
   health: 100
+  carName: Default
+  price: 0
+  carImage: {fileID: 0}
+  isUnlocked: 1
+  isSelected: 0
+  description: Default car, decent driving.

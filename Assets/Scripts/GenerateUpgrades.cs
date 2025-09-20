@@ -21,6 +21,9 @@ public class GenerateUpgrades : MonoBehaviour
     private HealthSystem healthSystem;
     private ScoreSystem scoreSystem;
 
+    [Header("Layout Settings")]
+    public float horizontalPadding = 4f;
+
     void Start()
     {
         inGameSystem = FindFirstObjectByType<InGameSystem>();
@@ -103,12 +106,12 @@ public class GenerateUpgrades : MonoBehaviour
             RectTransform rectTransform = upgradeOption.GetComponent<RectTransform>();
             if (rectTransform != null)
             {
-                float spacing = 300f;
+                float spacing = 250f;
                 float startX = -(selectedUpgrades.Length - 1) * spacing / 2f;
                 rectTransform.anchoredPosition = new Vector2(startX + index * spacing, 0f);
             }
-
             index++;
+
         }
     }
 

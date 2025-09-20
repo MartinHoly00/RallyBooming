@@ -20,4 +20,10 @@ MonoBehaviour:
   steeringSpeed: 100
   brakeForce: 1
   brakeDrag: 100
-  health: 150
+  health: 200
+  carName: Van
+  price: 500
+  carImage: {fileID: 0}
+  isUnlocked: 0
+  isSelected: 0
+  description: Big, tanky, not fast.

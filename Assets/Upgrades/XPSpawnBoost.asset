@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: XPSpawnBoost
   m_EditorClassIdentifier: 
   header: XP Spawn Boost
-  icon: {fileID: 21300000, guid: 9addf02c9ce2c4c40acdc186cfe5be45, type: 3}
+  icon: {fileID: 21300000, guid: ea2f9efc394fa4c8a9013888bdedae1a, type: 3}
   description: Increases spawn of xp orbs by 20%.
   type: 7

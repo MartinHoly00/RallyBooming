@@ -75,6 +75,11 @@ public class CarSpawner : MonoBehaviour
 
         CarControl cc = inst.GetComponentInChildren<CarControl>(true) ?? inst.GetComponent<CarControl>();
 
+        if (cc == null)
+        {
+            cc = FindFirstObjectByType<CarControl>();
+        }
+
         WireCarControl(cc, inst, data);
     }
 

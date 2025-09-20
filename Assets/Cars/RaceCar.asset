@@ -21,3 +21,9 @@ MonoBehaviour:
   brakeForce: 1
   brakeDrag: 100
   health: 100
+  carName: Race car
+  price: 1000
+  carImage: {fileID: 0}
+  isUnlocked: 0
+  isSelected: 0
+  description: Very fast, very good.

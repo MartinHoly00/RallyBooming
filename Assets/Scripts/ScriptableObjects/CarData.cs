@@ -15,4 +15,12 @@ public class CarData : ScriptableObject
   public float brakeForce = 1f;
   public float brakeDrag = 100f;
   public float health = 100f;
+
+  [Header("GarageStats")]
+  public string carName;
+  public int price = 1000;
+  public Sprite carImage;
+  public bool isUnlocked = false;
+  public bool isSelected = false;
+  public string description;
 }

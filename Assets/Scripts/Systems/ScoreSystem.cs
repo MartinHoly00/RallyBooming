@@ -9,12 +9,14 @@ public class ScoreSystem : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public int scoreMultiplier = 1;
 
-    private int currentScore;
+    public int currentScore;
     private bool isScoring;
     private Coroutine scoreRoutine;
     private CarControl carControl;
     private int speedMultiplaier = 1;
     public TextMeshProUGUI speedMultiText;
+
+    private MoneySystem moneySystem;
 
     void Awake()
     {
@@ -28,6 +30,7 @@ public class ScoreSystem : MonoBehaviour
     void Start()
     {
         carControl = FindFirstObjectByType<CarControl>();
+        moneySystem = FindFirstObjectByType<MoneySystem>();
         StartScore();
         speedMultiText.gameObject.SetActive(true);
     }
@@ -71,8 +74,19 @@ public class ScoreSystem : MonoBehaviour
     {
         while (isScoring)
         {
+            int previousScore = currentScore;
             currentScore += 1 * scoreMultiplier * speedMultiplaier;
             scoreText.text = "Score: " + currentScore.ToString();
+
+            int previousTens = previousScore / 10;
+            int currentTens = currentScore / 10;
+            int tensGained = currentTens - previousTens;
+
+            if (tensGained > 0)
+            {
+                moneySystem.AddMoney(tensGained);
+            }
+
             yield return new WaitForSeconds(1f);
         }
     }
@@ -101,6 +115,7 @@ public class ScoreSystem : MonoBehaviour
 
     private void CalculateSpeedMiltiplaier()
     {
+        if (speedMultiText == null) return;
         float speed = carControl.currentSpeed;
         if (speed > 20 && speed < 30)
         {

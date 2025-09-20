@@ -7,7 +7,7 @@ public class ShopSystem : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.SetString("SelectedCarId", "0");
+
     }
 
     public void SetActiveCar(int carIndex)

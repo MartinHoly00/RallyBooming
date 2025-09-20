@@ -21,3 +21,9 @@ MonoBehaviour:
   brakeForce: 1
   brakeDrag: 100
   health: 100
+  carName: Police
+  price: 200
+  carImage: {fileID: 0}
+  isUnlocked: 0
+  isSelected: 0
+  description: Police car, it is police.

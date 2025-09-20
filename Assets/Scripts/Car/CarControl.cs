@@ -44,14 +44,14 @@ public class CarControl : MonoBehaviour
     private float currentCameraLag = 0f;
 
     [Header("Braking")]
-    public float brakeForce = 1f;
+    public float brakeForce = 0.1f;
     public float brakeDrag = 100f;
     private float normalDrag;
 
     public HealthSystem healthSystem;
 
     private float deltaTime;
-    private bool moveForward, moveBackward, turnLeft, turnRight;
+    //private bool moveForward, moveBackward, turnLeft, turnRight;
 
     void Awake()
     {
@@ -264,14 +264,14 @@ public class CarControl : MonoBehaviour
         }
     }
 
-    public void PressForward() => moveForward = true;
-    public void ReleaseForward() => moveForward = false;
-    public void PressBackward() => moveBackward = true;
-    public void ReleaseBackward() => moveBackward = false;
-    public void PressLeft() => turnLeft = true;
-    public void ReleaseLeft() => turnLeft = false;
-    public void PressRight() => turnRight = true;
-    public void ReleaseRight() => turnRight = false;
+    /*     public void PressForward() => moveForward = true;
+        public void ReleaseForward() => moveForward = false;
+        public void PressBackward() => moveBackward = true;
+        public void ReleaseBackward() => moveBackward = false;
+        public void PressLeft() => turnLeft = true;
+        public void ReleaseLeft() => turnLeft = false;
+        public void PressRight() => turnRight = true;
+        public void ReleaseRight() => turnRight = false; */
 
     public void ApplyCarData(CarData data)
     {

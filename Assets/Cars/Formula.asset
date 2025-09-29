@@ -23,7 +23,7 @@ MonoBehaviour:
   health: 75
   carName: Formula
   price: 1000
-  carImage: {fileID: 0}
-  isUnlocked: 1
-  isSelected: 1
+  carImage: {fileID: 21300000, guid: f062097781a1643f9b935f79d95ebc59, type: 3}
+  isUnlocked: 0
+  isSelected: 0
   description: Formula car, fastest on earth. Bzum bzum.

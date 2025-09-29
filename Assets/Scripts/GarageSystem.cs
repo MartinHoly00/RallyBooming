@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,13 +19,49 @@ public class GarageSystem : MonoBehaviour
     public int money;
     public TextMeshProUGUI moneyText;
 
+    public List<int> unlockedCars = new List<int>();
+
+
 
     void Start()
     {
+        //PlayerPrefs.SetInt("Money", 5000); //TODO - 
         money = PlayerPrefs.GetInt("Money", 0);
         if (moneyText != null) moneyText.text = money.ToString() + "$";
         RenderCarButtons();
         RenderCarCard(carDatabase.cars[0]);
+        // unlocked cars saved in PlayerPrefs UnlockedCars as string: 1,2
+        string unlockedCarsStr = PlayerPrefs.GetString("UnlockedCars", "");
+        if (!string.IsNullOrEmpty(unlockedCarsStr))
+        {
+            string[] parts = unlockedCarsStr.Split(',');
+            foreach (string carId in parts)
+            {
+                foreach (CarData car in carDatabase.cars)
+                {
+                    if (car.carId == carId)
+                    {
+                        car.isUnlocked = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+
+        //get last selected car from PlayerPrefs
+        string selectedCarId = PlayerPrefs.GetString("SelectedCarId", "");
+        if (!string.IsNullOrEmpty(selectedCarId))
+        {
+            foreach (CarData car in carDatabase.cars)
+            {
+                if (car.carId == selectedCarId)
+                {
+                    car.isSelected = true;
+                    break;
+                }
+            }
+        }
     }
     public void RenderCarButtons()
     {
@@ -126,6 +164,14 @@ public class GarageSystem : MonoBehaviour
             car.isUnlocked = true;
             RenderCarCard(car);
             RenderCarButtons();
+            //save to PlayerPrefs
+            string unlockedCarsStr = PlayerPrefs.GetString("UnlockedCars", "");
+            List<string> unlockedCarsList = new List<string>(unlockedCarsStr.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
+            if (!unlockedCarsList.Contains(car.carId))
+            {
+                unlockedCarsList.Add(car.carId);
+                PlayerPrefs.SetString("UnlockedCars", string.Join(",", unlockedCarsList));
+            }
         }
         else
         {

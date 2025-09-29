@@ -23,7 +23,7 @@ MonoBehaviour:
   health: 200
   carName: Van
   price: 500
-  carImage: {fileID: 0}
+  carImage: {fileID: 21300000, guid: edd1c69be90484a218fdf5aa73a14504, type: 3}
   isUnlocked: 0
   isSelected: 0
   description: Big, tanky, not fast.

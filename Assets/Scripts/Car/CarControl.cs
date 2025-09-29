@@ -134,6 +134,8 @@ public class CarControl : MonoBehaviour
 
     void PhysicsMovement()
     {
+        if (Input.GetKey(KeyCode.Space)) return;
+
         float move = Input.GetAxis("Vertical") * maxSpeed;
         float turn = Input.GetAxis("Horizontal");
 
@@ -174,15 +176,20 @@ public class CarControl : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && rb.linearVelocity.magnitude > 0.1f)
         {
-            Vector3 brakeForceVector = -rb.linearVelocity.normalized * brakeForce;
+            // Add a braking force opposite to velocity (scales with speed)
+            Vector3 brakeForceVector = -rb.linearVelocity.normalized * brakeForce * currentSpeed;
             rb.AddForce(brakeForceVector, ForceMode.Acceleration);
-            rb.linearDamping = Mathf.Lerp(rb.linearDamping, brakeDrag, Time.deltaTime * 2f);
+
+            // Add *slightly increased drag* to simulate resistance
+            rb.linearDamping = Mathf.Lerp(rb.linearDamping, normalDrag + 2f, Time.fixedDeltaTime * 2f);
         }
         else
         {
-            rb.linearDamping = normalDrag;
+            // Go back to normal drag when not braking
+            rb.linearDamping = Mathf.Lerp(rb.linearDamping, normalDrag, Time.fixedDeltaTime * 2f);
         }
     }
+
 
     void UpdateWheelVisuals()
     {
@@ -218,6 +225,9 @@ public class CarControl : MonoBehaviour
             case "d":
                 if (currentSpeed > 0) rb.AddTorque(carTransform.up * turnSpeed);
                 else rb.AddTorque(-carTransform.up * turnSpeed);
+                break;
+            case "space":
+                // Handled in HandleBraking
                 break;
         }
     }

@@ -37,7 +37,7 @@ public class FireBallSpawner : MonoBehaviour
         {
             SpawnFireball();
 
-            // Decrease interval (increase difficulty) but clamp to min
+            //Cursor.lockState = CursorLockMode.Locked;
             currentSpawnInterval = Mathf.Max(minSpawnInterval, currentSpawnInterval - difficultyRampSpeed);
 
             // Reset timer

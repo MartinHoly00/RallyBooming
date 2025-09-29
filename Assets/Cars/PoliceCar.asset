@@ -23,7 +23,7 @@ MonoBehaviour:
   health: 100
   carName: Police
   price: 200
-  carImage: {fileID: 0}
+  carImage: {fileID: 21300000, guid: d86cb06d4a8d247499518ebf35b86bc0, type: 3}
   isUnlocked: 0
   isSelected: 0
   description: Police car, it is police.

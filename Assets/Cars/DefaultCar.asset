@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536cea8f506564b318b6d12211479978, type: 3}
+  m_Name: DefaultCar
+  m_EditorClassIdentifier: 
+  carId: 1
+  carPrefab: {fileID: 444874519428558696, guid: 81e30a91a7c1644fc93783c9d2abdfd1, type: 3}
+  mass: 1000
+  acceleration: 250
+  maxSpeed: 30
+  steeringSpeed: 100
+  brakeForce: 1
+  brakeDrag: 100
+  health: 100
+  carName: Default
+  price: 0
+  carImage: {fileID: 21300000, guid: 1dc23088f779c469ea26847bb044609c, type: 3}
+  isUnlocked: 1
+  isSelected: 1
+  description: Default car, decent driving.

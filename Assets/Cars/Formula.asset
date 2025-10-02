@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536cea8f506564b318b6d12211479978, type: 3}
+  m_Name: Formula
+  m_EditorClassIdentifier: 
+  carId: 5
+  carPrefab: {fileID: 6289871653792829539, guid: fbcf1e74c059541fead96b3af8efd17f, type: 3}
+  mass: 600
+  acceleration: 250
+  maxSpeed: 40
+  steeringSpeed: 100
+  brakeForce: 1
+  brakeDrag: 100
+  health: 75
+  carName: Formula
+  price: 1000
+  carImage: {fileID: 21300000, guid: f062097781a1643f9b935f79d95ebc59, type: 3}
+  isUnlocked: 0
+  isSelected: 0
+  description: Formula car, fastest on earth. Bzum bzum.

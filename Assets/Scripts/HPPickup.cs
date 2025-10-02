@@ -13,7 +13,7 @@ public class HPPickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("CarBody"))
         {
             healthSystem.Heal(healthAmount);
             if (pickupEffect != null)

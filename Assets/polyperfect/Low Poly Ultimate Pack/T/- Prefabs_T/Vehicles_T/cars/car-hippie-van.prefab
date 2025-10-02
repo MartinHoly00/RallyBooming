@@ -1,0 +1,348 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1000012736367036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4000010123830578}
+  m_Layer: 0
+  m_Name: car-hippie-van
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000010123830578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012736367036}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4612798883626240}
+  - {fileID: 4137529297720916}
+  - {fileID: 4177989894889522}
+  - {fileID: 4521586171357106}
+  - {fileID: 4341999669574874}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3906720886237326275
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4000010123830578}
+    m_Modifications:
+    - target: {fileID: 3902199380095454321, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.70991516
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902199380095454321, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.360482
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902199380095454321, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2738495
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902199380095454321, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902199380095454321, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902199380095454321, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902199380095454321, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902199380095454321, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902199380095454321, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902199380095454321, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905292647692387673, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
+      propertyPath: m_Name
+      value: car-hippie-van-wheel_FL
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
+--- !u!4 &4521586171357106 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3902199380095454321, guid: bd2b34d08a1344e07be2afeccbbb5504, type: 3}
+  m_PrefabInstance: {fileID: 3906720886237326275}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4055520150527354619
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4000010123830578}
+    m_Modifications:
+    - target: {fileID: 4055154785921287881, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7021713
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055154785921287881, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3604821
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055154785921287881, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.2738647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055154785921287881, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055154785921287881, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055154785921287881, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055154785921287881, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055154785921287881, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055154785921287881, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055154785921287881, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057402951561709025, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
+      propertyPath: m_Name
+      value: car-hippie-van-wheel_BR
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
+--- !u!4 &4177989894889522 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4055154785921287881, guid: 2be010b20cd65473d9924c5d1ef934de, type: 3}
+  m_PrefabInstance: {fileID: 4055520150527354619}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4451117696400742987
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4000010123830578}
+    m_Modifications:
+    - target: {fileID: 4450619487380409747, guid: 36a11c25be96d40a8be5939093405d86, type: 3}
+      propertyPath: m_Name
+      value: car-hippie-van-base
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455723209597855563, guid: 36a11c25be96d40a8be5939093405d86, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455723209597855563, guid: 36a11c25be96d40a8be5939093405d86, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0020969806
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455723209597855563, guid: 36a11c25be96d40a8be5939093405d86, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455723209597855563, guid: 36a11c25be96d40a8be5939093405d86, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455723209597855563, guid: 36a11c25be96d40a8be5939093405d86, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455723209597855563, guid: 36a11c25be96d40a8be5939093405d86, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455723209597855563, guid: 36a11c25be96d40a8be5939093405d86, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455723209597855563, guid: 36a11c25be96d40a8be5939093405d86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455723209597855563, guid: 36a11c25be96d40a8be5939093405d86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455723209597855563, guid: 36a11c25be96d40a8be5939093405d86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 36a11c25be96d40a8be5939093405d86, type: 3}
+--- !u!4 &4612798883626240 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4455723209597855563, guid: 36a11c25be96d40a8be5939093405d86, type: 3}
+  m_PrefabInstance: {fileID: 4451117696400742987}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7578048675294630863
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4000010123830578}
+    m_Modifications:
+    - target: {fileID: 7576688551239429909, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7021637
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576688551239429909, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3604821
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576688551239429909, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2738495
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576688551239429909, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576688551239429909, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576688551239429909, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576688551239429909, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576688551239429909, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576688551239429909, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576688551239429909, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7577657082729770137, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
+      propertyPath: m_Name
+      value: car-hippie-van-wheel_FR
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
+--- !u!4 &4341999669574874 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7576688551239429909, guid: 1e96ed32ffeb940ab9fc6f0b78a20c6b, type: 3}
+  m_PrefabInstance: {fileID: 7578048675294630863}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8217455371185664494
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4000010123830578}
+    m_Modifications:
+    - target: {fileID: 8215963271965730746, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.7021637
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215963271965730746, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.360482
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215963271965730746, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.2738647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215963271965730746, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215963271965730746, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215963271965730746, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215963271965730746, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215963271965730746, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215963271965730746, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215963271965730746, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218606224220943952, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
+      propertyPath: m_Name
+      value: car-hippie-van-wheel_BL
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
+--- !u!4 &4137529297720916 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8215963271965730746, guid: 8be4c760876434b268a86d3da1b20529, type: 3}
+  m_PrefabInstance: {fileID: 8217455371185664494}
+  m_PrefabAsset: {fileID: 0}

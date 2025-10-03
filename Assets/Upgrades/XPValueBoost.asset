@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: XPValueBoost
   m_EditorClassIdentifier: 
   header: XP Value Boost
-  icon: {fileID: 21300000, guid: ea2f9efc394fa4c8a9013888bdedae1a, type: 3}
+  icon: {fileID: 21300000, guid: 4d7b971c4c8ff4b01a7b5dda1f967c0b, type: 3}
   description: Increases XP gained from orbs by 50%.
   type: 8

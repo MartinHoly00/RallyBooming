@@ -12,6 +12,9 @@ public class MainMenu : MonoBehaviour
         mainMenuUI.SetActive(true);
         statisticsUI.SetActive(false);
         shopUI.SetActive(false);
+        //TODO - 
+        /*         Cursor.lockState = CursorLockMode.None;
+                        Cursor.visible = true; */
     }
 
     public void StartGame()

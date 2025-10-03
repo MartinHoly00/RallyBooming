@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RepairKit
   m_EditorClassIdentifier: 
   header: Repair Kit
-  icon: {fileID: 21300000, guid: 9addf02c9ce2c4c40acdc186cfe5be45, type: 3}
+  icon: {fileID: 21300000, guid: 228141dbab3c2407b86be6e18d76f77b, type: 3}
   description: Repairs 50 health points.
   type: 3

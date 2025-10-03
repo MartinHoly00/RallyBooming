@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ScoreIncrease
   m_EditorClassIdentifier: 
   header: Score Increase
-  icon: {fileID: 21300000, guid: 9addf02c9ce2c4c40acdc186cfe5be45, type: 3}
+  icon: {fileID: 21300000, guid: c67fe888c5eb644878dc56d9f5000a2a, type: 3}
   description: Score increases by +1 more.
   type: 10

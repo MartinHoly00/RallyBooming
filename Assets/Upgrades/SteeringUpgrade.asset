@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SteeringUpgrade
   m_EditorClassIdentifier: 
   header: Steering Improvement
-  icon: {fileID: 21300000, guid: 9addf02c9ce2c4c40acdc186cfe5be45, type: 3}
+  icon: {fileID: 21300000, guid: 172f6922951be49a480af407b4ae254e, type: 3}
   description: Improves steering responsiveness by 10%.
   type: 4

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: HealthIncrease
   m_EditorClassIdentifier: 
   header: Health Increase
-  icon: {fileID: 21300000, guid: 9addf02c9ce2c4c40acdc186cfe5be45, type: 3}
+  icon: {fileID: 21300000, guid: 21d131ded75024aa595d92b3a03db884, type: 3}
   description: Increases your maximum health by 20 points.
   type: 2

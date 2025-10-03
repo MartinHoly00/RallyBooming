@@ -38,7 +38,6 @@ public class ScoreSystem : MonoBehaviour
     void Update()
     {
         CalculateSpeedMiltiplaier();
-        //TODO - HandleCursorState();
     }
 
     public void StartScore()
@@ -145,18 +144,4 @@ public class ScoreSystem : MonoBehaviour
             speedMultiText.gameObject.SetActive(false);
         }
     }
-    //TODO - 
-    /*     public void HandleCursorState()
-        {
-            if (isScoring)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-        } */
 }

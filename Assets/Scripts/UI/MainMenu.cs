@@ -13,14 +13,15 @@ public class MainMenu : MonoBehaviour
         statisticsUI.SetActive(false);
         shopUI.SetActive(false);
         //TODO - 
-        /*         Cursor.lockState = CursorLockMode.None;
-                        Cursor.visible = true; */
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void StartGame()
     {
         SceneManager.LoadScene("SampleScene");
         PlayerPrefs.SetInt("TotalGamesPlayed", PlayerPrefs.GetInt("TotalGamesPlayed", 0) + 1);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void OpenStatistics()

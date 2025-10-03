@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
                 resumeButton.SetActive(false);
             }
         }
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ShowGameOverScreen()
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
             pauseSystem.PauseGame();
             SetScoreText();
         }
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void HideGameOverScreen()
@@ -62,6 +64,7 @@ public class GameManager : MonoBehaviour
             inGameSystem.InGameUi.SetActive(true);
             pauseSystem.ResumeGame();
         }
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void RestartGame()
@@ -70,12 +73,14 @@ public class GameManager : MonoBehaviour
         pauseSystem.ResumeGame();
         PlayerPrefs.SetInt("TotalGamesPlayed", PlayerPrefs.GetInt("TotalGamesPlayed", 0) + 1);
         ScoreSystem.Instance.StartScore();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
         pauseSystem.ResumeGame();
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void SetHeaderText(string text)

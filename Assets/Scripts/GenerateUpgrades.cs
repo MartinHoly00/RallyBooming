@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GenerateUpgrades : MonoBehaviour
@@ -65,6 +66,9 @@ public class GenerateUpgrades : MonoBehaviour
         // Generate fresh upgrades every time panel is shown
         selectedUpgrades = GetRandomUpgrades();
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         upgradePanel.SetActive(true);
         inGameSystem.isPaused = true;
 
@@ -124,6 +128,8 @@ public class GenerateUpgrades : MonoBehaviour
         inGameSystem.isPaused = false;
         pauseSystem.ResumeGame();
         PlayerPrefs.SetInt("UpgradesSelected", PlayerPrefs.GetInt("UpgradesSelected", 0) + 1);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void ApplyUpgrade(UpgradeType type)

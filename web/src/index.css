@@ -93,6 +93,11 @@ a:hover {
   height: 72px;
 }
 
+.nav-links a {
+  display: flex;
+  align-items: center;
+}
+
 .brand {
   display: flex;
   align-items: center;
@@ -122,6 +127,11 @@ a:hover {
   color: var(--rb-text);
 }
 
+.logo{
+  height: 60px;
+  object-fit: cover;
+}
+
 .hero {
   padding: 64px 0 24px;
 }
@@ -146,6 +156,9 @@ a:hover {
   display: grid;
   place-items: center;
   color: var(--rb-muted);
+  background-image: url("../src/assets/rallyboomin.gif");
+  background-size: cover;
+  background-position: center;
 }
 
 .hero-content {

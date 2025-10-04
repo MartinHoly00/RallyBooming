@@ -156,7 +156,7 @@ a:hover {
   display: grid;
   place-items: center;
   color: var(--rb-muted);
-  background-image: url("../src/assets/rallyboomin.gif");
+  background-image: url("../src/assets/1004.gif");
   background-size: cover;
   background-position: center;
 }

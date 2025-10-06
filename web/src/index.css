@@ -212,6 +212,13 @@ a:hover {
   box-shadow: var(--rb-shadow);
 }
 
+.card img{
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 12px;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
 .muted {
   color: var(--rb-muted);
 }

@@ -4,16 +4,19 @@ export default function CTA() {
       <div className="container">
         <div className="hero-card">
           <div className="hero-content">
-            <h2 style={{ marginTop: 0 }}>Ready to hit the road?</h2>
+            <h2>Ready to hit the road?</h2>
             <p className="muted">
               Download RallyBooming and start your climb today.
+              <br />
+              To play RallyBooming download release from my GitHub, un-zip and
+              play. Enjoy!
             </p>
             <div className="hero-cta">
-              <a className="rb-btn" href="#">
-                Download for Windows
-              </a>
-              <a className="rb-btn secondary" href="#">
-                Wishlist / Follow
+              <a
+                className="rb-btn"
+                href="https://github.com/MartinHoly00/RallyBooming/releases"
+              >
+                Download for Windows/Mac/Android
               </a>
             </div>
           </div>

@@ -1,8 +1,8 @@
 export default function Roadmap() {
   const items = [
     { q: "Now", text: "Core loop, upgrades, coin economy" },
-    { q: "Next", text: "More tracks, challenges, leaderboards" },
-    { q: "Later", text: "Multiplayer duels and clubs" },
+    { q: "Next", text: "More maps, challenges, upgrades" },
+    { q: "Later", text: "Multiplayer and more game modes" },
   ];
   return (
     <section className="section" id="roadmap" aria-label="Roadmap">

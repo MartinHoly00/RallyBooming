@@ -1,9 +1,6 @@
+import { cars } from "../data/cars";
+
 export default function Cars() {
-  const cars = [
-    { name: "Starter Hatch", stat: "Balanced" },
-    { name: "Rally Beast", stat: "Acceleration" },
-    { name: "Street Phantom", stat: "Top Speed" },
-  ];
   return (
     <section className="section" id="cars" aria-label="Cars">
       <div className="container">
@@ -11,9 +8,9 @@ export default function Cars() {
         <div className="grid-3">
           {cars.map((c) => (
             <div key={c.name} className="card">
-              <div className="muted">Class</div>
               <h3 style={{ marginTop: 6 }}>{c.name}</h3>
-              <div className="muted">Strength: {c.stat}</div>
+              <img src={c.icon} alt="car_icon" />
+              <div className="muted">{c.desc}</div>
             </div>
           ))}
         </div>

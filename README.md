@@ -2,7 +2,7 @@
 
 RallyBooming is a low‑poly 3D arcade driving game made with Unity (URP). Drive, collect XP, level up to upgrade your car, and earn money to unlock better cars.
 
-**🎮 [Play the game online](https://martinholy00.github.io/RallyBooming)**
+**🎮 [Find out more on website](https://martinholy00.github.io/RallyBooming)**
 
 ### Requirements
 

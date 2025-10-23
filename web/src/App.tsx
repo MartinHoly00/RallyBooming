@@ -1,26 +1,40 @@
-import logo from "./assets/icon.png";
-import {
-  Cars,
-  CTA,
-  Features,
-  Footer,
-  Hero,
-  NavBar,
-  Roadmap,
-} from "./components";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import Home from "./pages/Home";
+import New from "./pages/New";
+import { NavBar } from "./components";
 
-function App() {
+import logo from "./assets/rallyBoomin-icon.png";
+
+function Layout() {
   return (
     <>
       <NavBar logo={logo} />
-      <Hero />
-      <Features />
-      <Cars />
-      <Roadmap />
-      <CTA />
-      <Footer />
+      <Outlet />
     </>
   );
+}
+
+function App() {
+  const baseUrl = import.meta.env.BASE_URL;
+
+  const router = createBrowserRouter([
+    {
+      path: `${baseUrl}`,
+      element: <Layout />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "new",
+          element: <New />,
+        },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;

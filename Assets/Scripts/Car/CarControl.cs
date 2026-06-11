@@ -7,7 +7,21 @@ public class CarControl : MonoBehaviour
 
     public float acceleration = 20f;
     public float maxSpeed = 30f;
-    public float steeringSpeed = 5f;
+    public float steeringSpeed = 110f; // turn rate in degrees/sec at speed (overwritten by CarData)
+
+    [Header("Handling")]
+    [Tooltip("How strongly tyres resist sideways sliding. Higher = more grip, lower = more drift.")]
+    public float grip = 4f;
+    [Tooltip("Speed (m/s) at which steering reaches full strength. Below this, steering scales down.")]
+    public float steeringFullSpeedAt = 6f;
+    [Tooltip("Reverse top speed as a fraction of maxSpeed.")]
+    public float reverseSpeedFactor = 0.45f;
+    [Range(0f, 1f)]
+    [Tooltip("Fraction of top speed where tyres start losing grip and the car begins to drift.")]
+    public float driftStartSpeedFactor = 0.6f;
+    [Range(0f, 1f)]
+    [Tooltip("Grip kept at top speed, as a fraction of normal grip. Lower = more slippery when fast.")]
+    public float highSpeedGripFactor = 0.15f;
     public Rigidbody rb;
     public Transform carTransform;
     public Camera carCamera;
@@ -30,8 +44,6 @@ public class CarControl : MonoBehaviour
     private float currentSteerAngle = 0f;
     private float carMass = 1000f;
 
-    private float turnSpeed;
-
     [Header("Camera Settings")]
     public float cameraDistance = 10f;
     public float cameraHeight = 5f;
@@ -40,8 +52,12 @@ public class CarControl : MonoBehaviour
     public float cameraLagOnTurn = 2f;
     public float cameraOffsetOnTurn = 3f;
 
+    public float cameraLookSmoothTime = 0.06f;
+
     private Vector3 cameraVelocity;
     private float currentCameraLag = 0f;
+    private Vector3 cameraLookVelocity;
+    private Vector3 smoothedLookTarget;
 
     [Header("Braking")]
     public float brakeForce = 0.1f;
@@ -68,7 +84,15 @@ public class CarControl : MonoBehaviour
         rb.angularDamping = 3f;
         rb.centerOfMass = new Vector3(0, -0.5f, 0);
 
+        // The car is moved by physics in FixedUpdate (50 Hz) but the camera follows
+        // it per rendered frame in LateUpdate. Without interpolation the visual
+        // transform only updates on physics steps, so the camera chases a "stepping"
+        // target and stutters. Interpolation smooths the transform between steps.
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+
         normalDrag = rb.linearDamping;
+
+        smoothedLookTarget = carTransform.position + Vector3.up * cameraLookHeight;
     }
 
     void Update()
@@ -98,9 +122,6 @@ public class CarControl : MonoBehaviour
 
         if (!healthSystem.isDestroyed)
         {
-            CameraFollow();
-
-            turnSpeed = currentSpeed > 10f ? 50f : 70f;
             bool isGrounded;
 
             if (transform.eulerAngles.z > 45 && transform.eulerAngles.z < 315 || transform.eulerAngles.x > 45 && transform.eulerAngles.x < 315)
@@ -117,7 +138,6 @@ public class CarControl : MonoBehaviour
             if (isGrounded)
             {
                 PhysicsMovement();
-                HandleCarMovement();
                 HandleBraking();
             }
         }
@@ -125,51 +145,84 @@ public class CarControl : MonoBehaviour
         {
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            carCamera.transform.position = carTransform.position - carTransform.forward * cameraDistance + Vector3
-                .up * cameraHeight;
-            carCamera.transform.LookAt(carTransform.position + Vector3.up * cameraLookHeight);
+        }
+    }
 
+    void LateUpdate()
+    {
+        if (healthSystem == null) return;
+
+        if (healthSystem.isDestroyed)
+        {
+            // Settle into a clean static-ish shot when the car is wrecked
+            Vector3 flatForward = GetFlatForward();
+            Vector3 desiredPosition = carTransform.position - flatForward * cameraDistance + Vector3.up * cameraHeight;
+            carCamera.transform.position = Vector3.SmoothDamp(
+                carCamera.transform.position, desiredPosition, ref cameraVelocity, 1f / cameraFollowSpeed);
+            UpdateLookAt();
+        }
+        else
+        {
+            CameraFollow();
         }
     }
 
     void PhysicsMovement()
     {
-        if (Input.GetKey(KeyCode.Space)) return;
-
-        float move = Input.GetAxis("Vertical") * maxSpeed;
+        float throttle = Input.GetAxis("Vertical");
         float turn = Input.GetAxis("Horizontal");
+        bool braking = Input.GetKey(KeyCode.Space);
 
-        // Use AddForce instead of MovePosition for better collision handling
-        Vector3 forceDirection = carTransform.forward * move * acceleration * deltaTime;
-        rb.AddForce(forceDirection);
+        // Work in the car's heading flattened onto the ground so ramps/bumps
+        // don't steal drive force or throw off the grip direction.
+        Vector3 flatForward = Vector3.ProjectOnPlane(carTransform.forward, Vector3.up).normalized;
+        Vector3 flatRight = Vector3.ProjectOnPlane(carTransform.right, Vector3.up).normalized;
 
-        // Limit max speed
-        if (rb.linearVelocity.magnitude > maxSpeed)
+        Vector3 velocity = rb.linearVelocity;
+        float forwardSpeed = Vector3.Dot(velocity, flatForward);
+        float sidewaysSpeed = Vector3.Dot(velocity, flatRight);
+
+        currentSpeed = velocity.magnitude;
+        isMovingForward = forwardSpeed >= 0f;
+
+        // --- Drive: push along the heading until we reach the speed cap ---
+        if (!braking && Mathf.Abs(throttle) > 0.01f)
         {
-            rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
+            float speedCap = throttle >= 0f ? maxSpeed : maxSpeed * reverseSpeedFactor;
+            if (Mathf.Abs(forwardSpeed) < speedCap)
+            {
+                // Same force magnitude as before, so each car keeps its acceleration feel.
+                rb.AddForce(flatForward * throttle * maxSpeed * acceleration * deltaTime);
+            }
         }
 
-        currentSpeed = rb.linearVelocity.magnitude;
+        // --- Lateral grip: bleed off sideways velocity so the car follows its
+        // nose instead of sliding. This is what makes it feel planted, not icy.
+        // Above driftStartSpeedFactor of top speed the tyres progressively lose
+        // grip (fading toward highSpeedGripFactor), so the car gets loose and
+        // drifts when pushed hard at speed - like the old slippery feel.
+        float speedRatio = maxSpeed > 0.01f ? currentSpeed / maxSpeed : 0f;
+        float driftBlend = Mathf.InverseLerp(driftStartSpeedFactor, 1f, speedRatio);
+        float effectiveGrip = grip * Mathf.Lerp(1f, highSpeedGripFactor, driftBlend);
+        float gripFactor = Mathf.Clamp01(effectiveGrip * Time.fixedDeltaTime);
+        rb.AddForce(-flatRight * sidewaysSpeed * gripFactor, ForceMode.VelocityChange);
 
-        if (currentSpeed > 0.1f)
+        // --- Steering: rotate the car. Effectiveness ramps with speed and then
+        // holds steady (linear, not squared) so it's responsive without being
+        // twitchy at top speed. Steering inverts when reversing.
+        if (currentSpeed > 0.3f)
         {
-            float dotProduct = Vector3.Dot(rb.linearVelocity.normalized, carTransform.forward);
-            isMovingForward = dotProduct > 0;
+            float steerFactor = Mathf.Clamp01(currentSpeed / steeringFullSpeedAt);
+            float reverseSign = isMovingForward ? 1f : -1f;
+            float yaw = turn * steeringSpeed * steerFactor * reverseSign * Time.fixedDeltaTime;
+            rb.MoveRotation(rb.rotation * Quaternion.AngleAxis(yaw, Vector3.up));
         }
 
-        // Use AddTorque instead of MoveRotation for steering
-        if (currentSpeed > 0.5f) // Only turn when moving
-        {
-            float torqueAmount = turn * turnSpeed * currentSpeed * deltaTime;
-            rb.AddTorque(carTransform.up * torqueAmount * currentSpeed / 2f);
-        }
+        // Visual front-wheel steering angle.
+        float targetSteerAngle = turn * 30f;
+        currentSteerAngle = Mathf.Lerp(currentSteerAngle, targetSteerAngle, 8f * Time.fixedDeltaTime);
 
-        // Calculate target steering angle for visual wheels
-        float maxSteerAngle = 30f;
-        float targetSteerAngle = turn * maxSteerAngle;
-        currentSteerAngle = Mathf.Lerp(currentSteerAngle, targetSteerAngle, steeringSpeed * deltaTime);
-
-        UpdateWheelColliders(move);
+        UpdateWheelColliders(throttle * maxSpeed);
     }
 
     void HandleBraking()
@@ -208,39 +261,19 @@ public class CarControl : MonoBehaviour
         frontRightWheelMesh.localRotation = combinedRotation;
     }
 
-    void HandleCarMovement()
-    {
-        switch (Input.inputString)
-        {
-            case "w":
-                rb.AddForce(carTransform.forward * maxSpeed);
-                break;
-            case "s":
-                rb.AddForce(-carTransform.forward * maxSpeed);
-                break;
-            case "a":
-                if (currentSpeed > 0) rb.AddTorque(-carTransform.up * turnSpeed);
-                else rb.AddTorque(carTransform.up * turnSpeed);
-                break;
-            case "d":
-                if (currentSpeed > 0) rb.AddTorque(carTransform.up * turnSpeed);
-                else rb.AddTorque(-carTransform.up * turnSpeed);
-                break;
-            case "space":
-                // Handled in HandleBraking
-                break;
-        }
-    }
-
     void CameraFollow()
     {
         float turnInput = Input.GetAxis("Horizontal");
         float targetLag = Mathf.Abs(turnInput) * cameraLagOnTurn;
         currentCameraLag = Mathf.Lerp(currentCameraLag, targetLag, Time.deltaTime * 3f);
 
-        Vector3 turnOffset = carTransform.right * turnInput * cameraOffsetOnTurn;
+        // Use a flattened (yaw-only) forward so bumps that pitch/roll the car
+        // don't tilt or shake the camera.
+        Vector3 flatForward = GetFlatForward();
+        Vector3 flatRight = Vector3.Cross(Vector3.up, flatForward);
 
-        Vector3 basePosition = carTransform.position - carTransform.forward * cameraDistance + Vector3.up * cameraHeight;
+        Vector3 turnOffset = flatRight * turnInput * cameraOffsetOnTurn;
+        Vector3 basePosition = carTransform.position - flatForward * cameraDistance + Vector3.up * cameraHeight;
         Vector3 desiredPosition = basePosition + turnOffset;
 
         float dynamicFollowSpeed = cameraFollowSpeed * (1f - currentCameraLag * 0.3f);
@@ -252,7 +285,25 @@ public class CarControl : MonoBehaviour
             1f / dynamicFollowSpeed
         );
 
-        carCamera.transform.LookAt(carTransform.position + Vector3.up * cameraLookHeight);
+        UpdateLookAt();
+    }
+
+    // Smoothly point the camera at the car, damping the vertical bounce from bumps.
+    void UpdateLookAt()
+    {
+        Vector3 desiredLook = carTransform.position + Vector3.up * cameraLookHeight;
+        smoothedLookTarget = Vector3.SmoothDamp(
+            smoothedLookTarget, desiredLook, ref cameraLookVelocity, cameraLookSmoothTime);
+        carCamera.transform.LookAt(smoothedLookTarget);
+    }
+
+    // Car forward projected onto the horizontal plane, so pitch/roll never tilts the camera.
+    Vector3 GetFlatForward()
+    {
+        Vector3 flat = Vector3.ProjectOnPlane(carTransform.forward, Vector3.up);
+        if (flat.sqrMagnitude < 0.001f)
+            flat = Vector3.ProjectOnPlane(carTransform.up, Vector3.up); // car nose pointing straight up/down
+        return flat.normalized;
     }
 
     void UpdateWheelColliders(float move)
@@ -271,6 +322,23 @@ public class CarControl : MonoBehaviour
             float damage = Mathf.Round(currentSpeed);
             if (damage < 5f) return;
             healthSystem.TakeDamage(damage / 2);
+
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayEnvironmentHit(currentSpeed);
+
+            // If the car is going fast enough, smash through the object
+            if (currentSpeed > maxSpeed * 0.5f)
+            {
+                Destroy(collision.gameObject);
+            }
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Obsticles"))
+        {
+            // Obstacles only play the hit sound — no damage, never destroyed.
+            if (currentSpeed < 5f) return;
+
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayEnvironmentHit(currentSpeed);
         }
     }
 

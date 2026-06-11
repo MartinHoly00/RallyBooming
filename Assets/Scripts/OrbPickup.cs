@@ -41,6 +41,9 @@ public class OrbPickup : MonoBehaviour
         levelSystem.currentXP += levelSystem.xpPerOrb;
         PlayerPrefs.SetInt("XPCollected", PlayerPrefs.GetInt("XPCollected", 0) + 1);
 
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayXPPickup();
+
         // update UI if available
         if (inGameSystem != null)
         {
@@ -58,6 +61,9 @@ public class OrbPickup : MonoBehaviour
             levelSystem.currentXP = 0;
             levelSystem.xpTrashold += 10;
             levelSystem.xpPerOrb += 1;
+
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayLevelUp();
 
             if (inGameSystem != null)
                 inGameSystem.UpdateXPUI(levelSystem.currentXP, levelSystem.xpTrashold, levelSystem.currentLevel);

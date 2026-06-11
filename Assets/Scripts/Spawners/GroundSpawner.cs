@@ -21,6 +21,9 @@ public class GroundSpawner : MonoBehaviour
     // Store transforms for mesh instances
     private Dictionary<Mesh, List<Matrix4x4>> meshInstances = new Dictionary<Mesh, List<Matrix4x4>>();
 
+    // Selected ground tile transforms, used to validate raycast hits.
+    private HashSet<Transform> groundRoots = new HashSet<Transform>();
+
     void Start()
     {
         Spawn();
@@ -47,57 +50,93 @@ public class GroundSpawner : MonoBehaviour
     {
         if (groundObjects.Count == 0) return;
 
-        int totalSpawned = 0;
+        // Build the set of valid ground roots and one combined bounding volume
+        // covering every selected tile. We sample over the WHOLE area and accept
+        // a hit on any selected tile (or its children), so coverage is uniform no
+        // matter how the tiles share meshes/colliders or what order they're in.
+        groundRoots.Clear();
+        Bounds area = new Bounds();
+        bool hasArea = false;
+        float totalArea = 0f;
 
         foreach (GameObject ground in groundObjects)
         {
+            if (ground == null) continue;
+            groundRoots.Add(ground.transform);
+
             Renderer renderer = ground.GetComponent<Renderer>();
             if (renderer == null) continue;
 
-            Vector3 size = renderer.bounds.size;
-            Vector3 min = renderer.bounds.min;
-            Vector3 max = renderer.bounds.max;
+            Vector3 s = renderer.bounds.size;
+            totalArea += s.x * s.z;
 
-            int spawnCount = Mathf.RoundToInt(size.x * size.z * density);
-            spawnCount = Mathf.Min(spawnCount, maxObjects - totalSpawned);
+            if (!hasArea) { area = renderer.bounds; hasArea = true; }
+            else area.Encapsulate(renderer.bounds);
+        }
 
-            for (int i = 0; i < spawnCount; i++)
-            {
-                Vector3 randomPos = new Vector3(
-                    Random.Range(min.x, max.x),
-                    max.y + 10f,
-                    Random.Range(min.z, max.z)
-                );
+        if (!hasArea || totalArea <= 0f) return;
 
-                if (Physics.Raycast(randomPos, Vector3.down, out RaycastHit hit, size.y + 20f))
-                {
-                    if (hit.collider.gameObject == ground)
-                    {
-                        Vector3 spawnPos = hit.point + Vector3.up * yOffset;
-                        Quaternion rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
-                        Vector3 scale = Vector3.one * Random.Range(0.8f, 1.2f);
+        // How many objects to place, based on the real grass area and density.
+        int targetCount = Mathf.Min(maxObjects, Mathf.RoundToInt(totalArea * density));
 
-                        if (meshesToSpawn.Count > 0 && Random.value < 0.7f) // 70% chance grass
-                        {
-                            Mesh mesh = meshesToSpawn[Random.Range(0, meshesToSpawn.Count)];
-                            Matrix4x4 matrix = Matrix4x4.TRS(spawnPos, rotation, scale);
+        Vector3 min = area.min;
+        Vector3 max = area.max;
+        float rayLength = area.size.y + 40f;
 
-                            if (!meshInstances.ContainsKey(mesh))
-                                meshInstances[mesh] = new List<Matrix4x4>();
+        int placed = 0;
+        // Extra attempts cover the rays that land on gaps/roads/other tiles
+        // between grass patches and get rejected.
+        int maxAttempts = targetCount * 30;
 
-                            meshInstances[mesh].Add(matrix);
-                        }
-                        else if (prefabsToSpawn.Count > 0) // fallback to prefab
-                        {
-                            GameObject prefab = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Count)];
-                            Instantiate(prefab, spawnPos, rotation, transform);
-                        }
+        for (int attempt = 0; attempt < maxAttempts && placed < targetCount; attempt++)
+        {
+            Vector3 rayStart = new Vector3(
+                Random.Range(min.x, max.x),
+                max.y + 10f,
+                Random.Range(min.z, max.z)
+            );
 
-                        totalSpawned++;
-                        if (totalSpawned >= maxObjects) return;
-                    }
-                }
-            }
+            if (!Physics.Raycast(rayStart, Vector3.down, out RaycastHit hit, rayLength))
+                continue;
+            if (!IsGroundHit(hit.collider.transform))
+                continue;
+
+            PlaceObject(hit.point + Vector3.up * yOffset);
+            placed++;
+        }
+    }
+
+    // True if the hit belongs to one of the selected ground tiles, or any child
+    // of one (so it works whether colliders sit on the tile root or on children).
+    bool IsGroundHit(Transform t)
+    {
+        while (t != null)
+        {
+            if (groundRoots.Contains(t)) return true;
+            t = t.parent;
+        }
+        return false;
+    }
+
+    void PlaceObject(Vector3 spawnPos)
+    {
+        Quaternion rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+        Vector3 scale = Vector3.one * Random.Range(0.8f, 1.2f);
+
+        if (meshesToSpawn.Count > 0 && Random.value < 0.7f) // 70% chance grass
+        {
+            Mesh mesh = meshesToSpawn[Random.Range(0, meshesToSpawn.Count)];
+            Matrix4x4 matrix = Matrix4x4.TRS(spawnPos, rotation, scale);
+
+            if (!meshInstances.ContainsKey(mesh))
+                meshInstances[mesh] = new List<Matrix4x4>();
+
+            meshInstances[mesh].Add(matrix);
+        }
+        else if (prefabsToSpawn.Count > 0) // fallback to prefab
+        {
+            GameObject prefab = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Count)];
+            Instantiate(prefab, spawnPos, rotation, transform);
         }
     }
 }

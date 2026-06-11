@@ -6,8 +6,20 @@ public class OrbSpawner : MonoBehaviour
     public GameObject orbPrefab;
     public float maxOrbs = 10;
     public float spawnInterval = 2f;
+    [Tooltip("How high above the ground surface the orb is placed.")]
+    public float orbHeightAboveGround = 1f;
+    [Tooltip("Keep spawns this far inside the edges of the ground area.")]
+    public float spawnEdgeMargin = 50f;
+
+    [Tooltip("How many spots to try per spawn before giving up (higher helps on crowded city maps).")]
+    public int maxSpawnAttempts = 12;
+
     [Header("References")]
     public GameObject ground;
+    [Tooltip("Which layers count as ground when placing orbs on the surface.")]
+    public LayerMask groundMask = ~0;
+    [Tooltip("Layers that block spawning (buildings, obstacles). Orbs won't spawn on or inside these.")]
+    public LayerMask obstacleMask;
 
     private int currentOrbCount = 0;
     private Bounds groundBounds;
@@ -39,13 +51,31 @@ public class OrbSpawner : MonoBehaviour
         HealthSystem hs = FindFirstObjectByType<HealthSystem>();
         if (hs != null && hs.isDestroyed) return;
 
-        float randomX = Random.Range(groundBounds.min.x + 50f, groundBounds.max.x - 50f);
-        float randomZ = Random.Range(groundBounds.min.z + 50f, groundBounds.max.z - 50f);
+        // Cast against ground AND obstacles together, then look at what the ray
+        // hits first. A building fills the whole column from street to roof, so
+        // a ray dropped from the sky hits its roof first whenever that X/Z is
+        // inside or under a building - letting us reject those spots and only
+        // spawn on open ground. We retry a few times so crowded city maps still
+        // find a clear spot rather than skipping the spawn.
+        for (int attempt = 0; attempt < maxSpawnAttempts; attempt++)
+        {
+            float randomX = Random.Range(groundBounds.min.x + spawnEdgeMargin, groundBounds.max.x - spawnEdgeMargin);
+            float randomZ = Random.Range(groundBounds.min.z + spawnEdgeMargin, groundBounds.max.z - spawnEdgeMargin);
 
-        Vector3 spawnPos = new Vector3(randomX, groundBounds.max.y + 1f, randomZ);
+            Vector3 rayStart = new Vector3(randomX, groundBounds.max.y + 50f, randomZ);
+            if (!Physics.Raycast(rayStart, Vector3.down, out RaycastHit hit, Mathf.Infinity, groundMask | obstacleMask, QueryTriggerInteraction.Ignore))
+                continue; // nothing under this point (gap in the map) - try elsewhere
 
-        Instantiate(orbPrefab, spawnPos, Quaternion.identity);
-        currentOrbCount++;
+            bool hitGround = (groundMask.value & (1 << hit.collider.gameObject.layer)) != 0;
+            if (!hitGround)
+                continue; // first thing hit was a building/obstacle - spot is occupied
+
+            Vector3 spawnPos = hit.point + Vector3.up * orbHeightAboveGround;
+            Instantiate(orbPrefab, spawnPos, Quaternion.identity);
+            currentOrbCount++;
+            return;
+        }
+        // Couldn't find a clear spot this interval; we'll try again next time.
     }
 
     public void OrbCollected()

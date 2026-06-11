@@ -16,6 +16,10 @@ public class HPPickup : MonoBehaviour
         if (other.CompareTag("CarBody"))
         {
             healthSystem.Heal(healthAmount);
+
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayHealthPickup();
+
             if (pickupEffect != null)
             {
                 GameObject explosion = Instantiate(pickupEffect, transform.position, transform.rotation);
